@@ -1,0 +1,831 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Une sélection structurée d’outils et de ressources pour pratiquer le vibe coding : agents, prototypage, contexte, tests, déploiement et apprentissage.">
+  <meta name="theme-color" content="#f3f0e8">
+  <title>Outils du Vibe Coding · Codex Prime</title>
+  <style>
+    :root{--ink:#181914;--paper:#f3f0e8;--card:#fbfaf6;--line:#d7d1c3;--acid:#d6ff36;--violet:#6f55e7;--muted:#68695f;--shadow:0 18px 55px rgba(37,34,25,.10);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--paper)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;background:radial-gradient(circle at 88% 4%,rgba(111,85,231,.14),transparent 28%),var(--paper)}
+    a{color:inherit}.shell{width:min(1180px,calc(100% - 32px));margin:auto}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0;border-bottom:1px solid var(--line)}
+    .brand{font-weight:900;letter-spacing:-.04em;text-decoration:none;font-size:1.1rem}.brand i{font-style:normal;color:var(--violet)}
+    .nav-links{display:flex;gap:22px;align-items:center}.nav-links a{font-size:.9rem;font-weight:700;text-decoration:none}.nav-links .pill{padding:10px 16px;border:1px solid var(--ink);border-radius:999px}
+    .hero{display:grid;grid-template-columns:1.04fr .96fr;gap:54px;align-items:center;padding:72px 0 64px}
+    .eyebrow{display:inline-flex;align-items:center;gap:9px;margin:0 0 18px;font-size:.76rem;font-weight:900;letter-spacing:.15em;text-transform:uppercase}.eyebrow:before{content:"";width:10px;height:10px;background:var(--acid);border:1px solid var(--ink);border-radius:50%}
+    h1{margin:0;font-size:clamp(3.35rem,7.4vw,7.25rem);line-height:.84;letter-spacing:-.075em;max-width:760px}.accent{position:relative;display:inline-block;z-index:0}.accent:after{content:"";position:absolute;left:-2%;right:-3%;bottom:4%;height:25%;background:var(--acid);transform:rotate(-1.6deg);z-index:-1}
+    .lead{max-width:650px;margin:30px 0 0;font-size:clamp(1.05rem,2vw,1.28rem);line-height:1.62;color:var(--muted)}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}.button{display:inline-flex;align-items:center;gap:8px;padding:14px 20px;border:1px solid var(--ink);border-radius:999px;font-weight:850;text-decoration:none;background:var(--ink);color:white}.button.secondary{background:transparent;color:var(--ink)}
+    .visual{position:relative;padding:14px;background:var(--card);border:1px solid var(--ink);border-radius:28px;box-shadow:14px 14px 0 var(--violet);transform:rotate(1.2deg)}.visual img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:18px;background:#e8e3d9}.visual figcaption{padding:12px 5px 2px;font-size:.72rem;color:var(--muted)}
+    .statbar{display:grid;grid-template-columns:repeat(3,1fr);border-block:1px solid var(--line);margin-bottom:70px}.stat{padding:24px 8px}.stat+.stat{border-left:1px solid var(--line)}.stat b{display:block;font-size:1.8rem;letter-spacing:-.04em}.stat span{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:800}
+    .section-head{display:flex;justify-content:space-between;gap:30px;align-items:end}.section-head h2{margin:0;font-size:clamp(2rem,5vw,4.4rem);letter-spacing:-.065em;line-height:.95}.section-head p{max-width:520px;margin:0;color:var(--muted);line-height:1.6}
+    .controls{position:sticky;top:0;z-index:5;padding:20px 0 16px;background:linear-gradient(var(--paper) 74%,transparent)}
+    .search-wrap{position:relative}.search-wrap span{position:absolute;left:18px;top:50%;transform:translateY(-50%);font-size:1.2rem}.search{width:100%;padding:17px 20px 17px 50px;border:1px solid var(--ink);border-radius:16px;background:var(--card);font:inherit;font-size:1rem;outline:none}.search:focus{box-shadow:0 0 0 4px rgba(111,85,231,.18)}
+    .filters{display:flex;gap:9px;overflow-x:auto;padding:12px 0 4px;scrollbar-width:none}.filter{flex:0 0 auto;border:1px solid var(--line);background:var(--card);padding:10px 14px;border-radius:999px;font:inherit;font-size:.78rem;font-weight:800;cursor:pointer}.filter.active{background:var(--ink);color:white;border-color:var(--ink)}
+    .catalog{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:18px 0 90px}.tool-card{display:flex;flex-direction:column;min-height:245px;padding:22px;border:1px solid var(--line);border-radius:20px;background:rgba(251,250,246,.88);transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}.tool-card:hover{transform:translateY(-4px);border-color:var(--ink);box-shadow:var(--shadow)}.tool-card[hidden]{display:none}
+    .card-top{display:flex;justify-content:space-between;align-items:center}.type{display:inline-block;padding:6px 9px;border-radius:7px;background:#ece8df;font-size:.68rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em}.arrow{font-size:1.2rem}.tool-card h3{margin:24px 0 10px;font-size:1.42rem;letter-spacing:-.035em}.tool-card h3 a{text-decoration:none}.tool-card h3 a:after{content:"";position:absolute;inset:0}.tool-card{position:relative}.tool-card p{margin:0 0 24px;color:var(--muted);line-height:1.5;font-size:.92rem}.meta{display:flex;justify-content:space-between;gap:10px;margin-top:auto;padding-top:15px;border-top:1px solid var(--line);font-size:.67rem;color:var(--muted)}.meta span:last-child{text-align:right}
+    .empty{display:none;text-align:center;padding:60px 20px 100px;color:var(--muted)}.empty.visible{display:block}
+    .principles{margin:0 0 84px;padding:clamp(28px,5vw,56px);background:var(--ink);color:white;border-radius:28px}.principles h2{margin:0 0 28px;font-size:clamp(2rem,4vw,3.6rem);letter-spacing:-.055em}.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#45463e;border:1px solid #45463e}.step{padding:24px;background:var(--ink)}.step b{display:block;margin-bottom:12px;color:var(--acid);font-size:.75rem;letter-spacing:.12em}.step span{line-height:1.45}
+    footer{padding:30px 0 50px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;color:var(--muted);font-size:.82rem}footer a{font-weight:800}
+    @media(max-width:900px){.hero{grid-template-columns:1fr;padding-top:48px}.visual{max-width:650px}.catalog{grid-template-columns:repeat(2,1fr)}.steps{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:620px){.nav-links a:first-child{display:none}.hero{gap:38px}.statbar{grid-template-columns:1fr}.stat+.stat{border-left:0;border-top:1px solid var(--line)}.section-head{display:block}.section-head p{margin-top:16px}.catalog{grid-template-columns:1fr}.steps{grid-template-columns:1fr}.nav-links{gap:8px}footer{display:block}footer p+ p{margin-top:18px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.tool-card{transition:none}}
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <nav class="nav" aria-label="Navigation principale">
+      <a class="brand" href="index.html">Codex <i>Prime</i></a>
+      <div class="nav-links"><a href="#catalogue">Catalogue</a><a class="pill" href="https://github.com/Scap-Mehdi/awesome-vibecoding" target="_blank" rel="noopener noreferrer">Source GitHub ↗</a></div>
+    </nav>
+
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Boîte à outils 2026</p>
+        <h1>Codez à la <span class="accent">vibe.</span><br>Livrez avec méthode.</h1>
+        <p class="lead">Une sélection claire d’outils, d’agents et de ressources pour passer d’une idée exprimée en langage naturel à un produit testé et déployé.</p>
+        <div class="hero-actions">
+          <a class="button" href="#catalogue">Explorer 54 ressources ↓</a>
+          <a class="button secondary" href="https://github.com/Scap-Mehdi/awesome-vibecoding/blob/main/README.fr.md" target="_blank" rel="noopener noreferrer">Lire le guide complet</a>
+        </div>
+      </div>
+      <figure class="visual">
+        <img src="https://formations.mehdiguiraud.com/cours/SCAP/VIBE-CODING/images/Vibe-coding.png" alt="Illustration du concept de Vibe Coding" loading="eager">
+        <figcaption>Illustration : formations.mehdiguiraud.com</figcaption>
+      </figure>
+    </header>
+
+    <section class="statbar" aria-label="Résumé du catalogue">
+      <div class="stat"><b>54</b><span>ressources sélectionnées</span></div>
+      <div class="stat"><b>9</b><span>catégories pratiques</span></div>
+      <div class="stat"><b>1</b><span>objectif : créer mieux</span></div>
+    </section>
+
+    <main id="catalogue">
+      <div class="section-head">
+        <h2>Trouvez le bon outil<br>pour la bonne tâche.</h2>
+        <p>Filtrez par usage ou recherchez un nom. Les liens ouvrent les sites officiels recensés dans Awesome Vibe Coding.</p>
+      </div>
+      <div class="controls">
+        <label class="search-wrap"><span aria-hidden="true">⌕</span><input id="search" class="search" type="search" placeholder="Rechercher un outil, un usage, une catégorie…" aria-label="Rechercher dans le catalogue"></label>
+        <div class="filters" role="group" aria-label="Filtrer par catégorie">
+          <button class="filter active" type="button" data-filter="all">Tous</button>
+          <button class="filter" type="button" data-filter="code-et-edition">⌘ Code et édition</button>
+<button class="filter" type="button" data-filter="prototypage-d-applications-et-d-interfaces">✦ Prototypage d'applications et d'interfaces</button>
+<button class="filter" type="button" data-filter="contexte-specifications-et-integrations">⛓ Contexte, spécifications et intégrations</button>
+<button class="filter" type="button" data-filter="tests-revue-et-securite">✓ Tests, revue et sécurité</button>
+<button class="filter" type="button" data-filter="deploiement-et-execution">↗ Déploiement et exécution</button>
+<button class="filter" type="button" data-filter="espaces-de-travail-et-usage-des-agents">◫ Espaces de travail et usage des agents</button>
+<button class="filter" type="button" data-filter="premier-projet">◎ Premier projet</button>
+<button class="filter" type="button" data-filter="workflows-pratiques">↻ Workflows pratiques</button>
+<button class="filter" type="button" data-filter="concepts-et-recherche">◌ Concepts et recherche</button>
+        </div>
+      </div>
+      <div id="cards" class="catalog">
+<article class="tool-card" data-category="code-et-edition" data-search="aider pair programming en terminal avec des modèles cloud ou locaux et une intégration git cli code et édition">
+  <div class="card-top">
+    <span class="type">CLI</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://github.com/Aider-AI/aider" target="_blank" rel="noopener noreferrer">Aider</a></h3>
+  <p>Pair programming en terminal avec des modèles cloud ou locaux et une intégration Git</p>
+  <div class="meta">
+    <span>Code et édition</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="code-et-edition" data-search="claude code assistant de code agentique avec workflows en terminal et par projet cli code et édition">
+  <div class="card-top">
+    <span class="type">CLI</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://code.claude.com/docs/en/overview" target="_blank" rel="noopener noreferrer">Claude Code</a></h3>
+  <p>Assistant de code agentique avec workflows en terminal et par projet</p>
+  <div class="meta">
+    <span>Code et édition</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="code-et-edition" data-search="cline agent de code pour ide, terminal et desktop, avec outils fichiers, commandes et navigateur  code et édition">
+  <div class="card-top">
+    <span class="type">Ressource</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://github.com/cline/cline" target="_blank" rel="noopener noreferrer">Cline</a></h3>
+  <p>Agent de code pour IDE, terminal et desktop, avec outils fichiers, commandes et navigateur</p>
+  <div class="meta">
+    <span>Code et édition</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="code-et-edition" data-search="cursor éditeur et agent de code pour l'implémentation, le débogage et la revue de code ide code et édition">
+  <div class="card-top">
+    <span class="type">IDE</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://www.cursor.com/" target="_blank" rel="noopener noreferrer">Cursor</a></h3>
+  <p>Éditeur et agent de code pour l'implémentation, le débogage et la revue de code</p>
+  <div class="meta">
+    <span>Code et édition</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="code-et-edition" data-search="gemini cli agent de code open source en terminal avec accès par clé api, vertex ou offre entreprise éligible. l'accès par abonnement grand public est retiré cli code et édition">
+  <div class="card-top">
+    <span class="type">CLI</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://github.com/google-gemini/gemini-cli" target="_blank" rel="noopener noreferrer">Gemini CLI</a></h3>
+  <p>Agent de code open source en terminal avec accès par clé API, Vertex ou offre entreprise éligible. L'accès par abonnement grand public est retiré</p>
+  <div class="meta">
+    <span>Code et édition</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="code-et-edition" data-search="github copilot assistance au code et workflows d'agents dans github et les ide compatibles  code et édition">
+  <div class="card-top">
+    <span class="type">Ressource</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://github.com/features/copilot" target="_blank" rel="noopener noreferrer">GitHub Copilot</a></h3>
+  <p>Assistance au code et workflows d'agents dans GitHub et les IDE compatibles</p>
+  <div class="meta">
+    <span>Code et édition</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="code-et-edition" data-search="goose agent local extensible avec workflows de code, interfaces desktop et cli, et outils mcp cli code et édition">
+  <div class="card-top">
+    <span class="type">CLI</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://github.com/aaif-goose/goose" target="_blank" rel="noopener noreferrer">Goose</a></h3>
+  <p>Agent local extensible avec workflows de code, interfaces desktop et CLI, et outils MCP</p>
+  <div class="meta">
+    <span>Code et édition</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="code-et-edition" data-search="kiro agent de code aws avec workflows ide et cli, spécifications et tests ide code et édition">
+  <div class="card-top">
+    <span class="type">IDE</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://kiro.dev" target="_blank" rel="noopener noreferrer">Kiro</a></h3>
+  <p>Agent de code AWS avec workflows IDE et CLI, spécifications et tests</p>
+  <div class="meta">
+    <span>Code et édition</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="code-et-edition" data-search="openai codex cli agent de code openai qui s'exécute localement dans le terminal cli code et édition">
+  <div class="card-top">
+    <span class="type">CLI</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://openai.com/codex/" target="_blank" rel="noopener noreferrer">OpenAI Codex CLI</a></h3>
+  <p>Agent de code OpenAI qui s'exécute localement dans le terminal</p>
+  <div class="meta">
+    <span>Code et édition</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="code-et-edition" data-search="pi agent de code en terminal, extensible et intégrable comme harnais cli code et édition">
+  <div class="card-top">
+    <span class="type">CLI</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://github.com/earendil-works/pi" target="_blank" rel="noopener noreferrer">Pi</a></h3>
+  <p>Agent de code en terminal, extensible et intégrable comme harnais</p>
+  <div class="meta">
+    <span>Code et édition</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="prototypage-d-applications-et-d-interfaces" data-search="bolt.new création d'applications en langage naturel, par stackblitz web prototypage d'applications et d'interfaces">
+  <div class="card-top">
+    <span class="type">Web</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://bolt.new/" target="_blank" rel="noopener noreferrer">Bolt.new</a></h3>
+  <p>Création d'applications en langage naturel, par StackBlitz</p>
+  <div class="meta">
+    <span>Prototypage d'applications et d'interfaces</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="prototypage-d-applications-et-d-interfaces" data-search="dyad créer des applications en local avec des fournisseurs de modèles configurables desktop prototypage d'applications et d'interfaces">
+  <div class="card-top">
+    <span class="type">Desktop</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://github.com/dyad-sh/dyad" target="_blank" rel="noopener noreferrer">Dyad</a></h3>
+  <p>Créer des applications en local avec des fournisseurs de modèles configurables</p>
+  <div class="meta">
+    <span>Prototypage d'applications et d'interfaces</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="prototypage-d-applications-et-d-interfaces" data-search="lovable génération d'applications full-stack avec supabase web prototypage d'applications et d'interfaces">
+  <div class="card-top">
+    <span class="type">Web</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://lovable.dev/" target="_blank" rel="noopener noreferrer">Lovable</a></h3>
+  <p>Génération d'applications full-stack avec Supabase</p>
+  <div class="meta">
+    <span>Prototypage d'applications et d'interfaces</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="prototypage-d-applications-et-d-interfaces" data-search="onlook modifier visuellement les interfaces d'une application tout en travaillant sur le code web prototypage d'applications et d'interfaces">
+  <div class="card-top">
+    <span class="type">Web</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://www.onlook.com/" target="_blank" rel="noopener noreferrer">Onlook</a></h3>
+  <p>Modifier visuellement les interfaces d'une application tout en travaillant sur le code</p>
+  <div class="meta">
+    <span>Prototypage d'applications et d'interfaces</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="prototypage-d-applications-et-d-interfaces" data-search="replit créer et itérer sur des applications avec replit agent web prototypage d'applications et d'interfaces">
+  <div class="card-top">
+    <span class="type">Web</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://replit.com/" target="_blank" rel="noopener noreferrer">Replit</a></h3>
+  <p>Créer et itérer sur des applications avec Replit Agent</p>
+  <div class="meta">
+    <span>Prototypage d'applications et d'interfaces</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="prototypage-d-applications-et-d-interfaces" data-search="v0 l'ia de vercel pour générer des ui et du react web prototypage d'applications et d'interfaces">
+  <div class="card-top">
+    <span class="type">Web</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://v0.app/" target="_blank" rel="noopener noreferrer">v0</a></h3>
+  <p>L'IA de Vercel pour générer des UI et du React</p>
+  <div class="meta">
+    <span>Prototypage d'applications et d'interfaces</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="contexte-specifications-et-integrations" data-search="caliber cli qui génère et synchronise les configurations d'agents ia pour claude code, cursor et codex  contexte, spécifications et intégrations">
+  <div class="card-top">
+    <span class="type">Ressource</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://github.com/caliber-ai-org/ai-setup" target="_blank" rel="noopener noreferrer">Caliber</a></h3>
+  <p>CLI qui génère et synchronise les configurations d'agents IA pour Claude Code, Cursor et Codex</p>
+  <div class="meta">
+    <span>Contexte, spécifications et intégrations</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="contexte-specifications-et-integrations" data-search="context7 récupérer la documentation des bibliothèques comme contexte de code mcp contexte, spécifications et intégrations">
+  <div class="card-top">
+    <span class="type">MCP</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://github.com/upstash/context7" target="_blank" rel="noopener noreferrer">Context7</a></h3>
+  <p>Récupérer la documentation des bibliothèques comme contexte de code</p>
+  <div class="meta">
+    <span>Contexte, spécifications et intégrations</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="contexte-specifications-et-integrations" data-search="filesystem mcp donner aux agents un accès contrôlé aux fichiers du projet mcp contexte, spécifications et intégrations">
+  <div class="card-top">
+    <span class="type">MCP</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem" target="_blank" rel="noopener noreferrer">Filesystem MCP</a></h3>
+  <p>Donner aux agents un accès contrôlé aux fichiers du projet</p>
+  <div class="meta">
+    <span>Contexte, spécifications et intégrations</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="contexte-specifications-et-integrations" data-search="github mcp connecter les workflows de dépôts, d'issues et de pull requests mcp contexte, spécifications et intégrations">
+  <div class="card-top">
+    <span class="type">MCP</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://github.com/github/github-mcp-server" target="_blank" rel="noopener noreferrer">GitHub MCP</a></h3>
+  <p>Connecter les workflows de dépôts, d'issues et de pull requests</p>
+  <div class="meta">
+    <span>Contexte, spécifications et intégrations</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="contexte-specifications-et-integrations" data-search="neon connecter les workflows de développement aux bases de données neon mcp contexte, spécifications et intégrations">
+  <div class="card-top">
+    <span class="type">MCP</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://github.com/neondatabase/mcp-server-neon" target="_blank" rel="noopener noreferrer">Neon</a></h3>
+  <p>Connecter les workflows de développement aux bases de données Neon</p>
+  <div class="meta">
+    <span>Contexte, spécifications et intégrations</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="contexte-specifications-et-integrations" data-search="notion mcp mcp officiel hébergé pour chercher, lire et mettre à jour du contenu notion mcp contexte, spécifications et intégrations">
+  <div class="card-top">
+    <span class="type">MCP</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://developers.notion.com/guides/mcp/overview" target="_blank" rel="noopener noreferrer">Notion MCP</a></h3>
+  <p>MCP officiel hébergé pour chercher, lire et mettre à jour du contenu Notion</p>
+  <div class="meta">
+    <span>Contexte, spécifications et intégrations</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="contexte-specifications-et-integrations" data-search="openspec cadre de développement piloté par les spécifications pour assistants de code ia  contexte, spécifications et intégrations">
+  <div class="card-top">
+    <span class="type">Ressource</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://github.com/Fission-AI/OpenSpec" target="_blank" rel="noopener noreferrer">OpenSpec</a></h3>
+  <p>Cadre de développement piloté par les spécifications pour assistants de code IA</p>
+  <div class="meta">
+    <span>Contexte, spécifications et intégrations</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="contexte-specifications-et-integrations" data-search="supabase mcp mcp officiel pour les schémas, requêtes et configurations de projet supabase mcp contexte, spécifications et intégrations">
+  <div class="card-top">
+    <span class="type">MCP</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://github.com/supabase/mcp" target="_blank" rel="noopener noreferrer">Supabase MCP</a></h3>
+  <p>MCP officiel pour les schémas, requêtes et configurations de projet Supabase</p>
+  <div class="meta">
+    <span>Contexte, spécifications et intégrations</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="tests-revue-et-securite" data-search="agent qa écrire et exécuter des tests web et mobile en langage naturel mcp tests, revue et sécurité">
+  <div class="card-top">
+    <span class="type">MCP</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://github.com/vostride/agent-qa" target="_blank" rel="noopener noreferrer">Agent QA</a></h3>
+  <p>Écrire et exécuter des tests web et mobile en langage naturel</p>
+  <div class="meta">
+    <span>Tests, revue et sécurité</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="tests-revue-et-securite" data-search="playwright mcp (microsoft) automatisation officielle du navigateur par instantanés structurés des pages mcp tests, revue et sécurité">
+  <div class="card-top">
+    <span class="type">MCP</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://github.com/microsoft/playwright-mcp" target="_blank" rel="noopener noreferrer">Playwright MCP (Microsoft)</a></h3>
+  <p>Automatisation officielle du navigateur par instantanés structurés des pages</p>
+  <div class="meta">
+    <span>Tests, revue et sécurité</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="tests-revue-et-securite" data-search="pr-agent relecteur de pull requests maintenu par la communauté, distinct de qodo  tests, revue et sécurité">
+  <div class="card-top">
+    <span class="type">Ressource</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://github.com/The-PR-Agent/pr-agent" target="_blank" rel="noopener noreferrer">PR-Agent</a></h3>
+  <p>Relecteur de pull requests maintenu par la communauté, distinct de Qodo</p>
+  <div class="meta">
+    <span>Tests, revue et sécurité</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="tests-revue-et-securite" data-search="prbl scanner une application en ligne ou un dépôt pour trouver les failles fréquentes du code généré par ia. la github action commente les pr. le correcteur pro applique des corrections vérifiées web tests, revue et sécurité">
+  <div class="card-top">
+    <span class="type">Web</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://getprbl.com" target="_blank" rel="noopener noreferrer">Prbl</a></h3>
+  <p>Scanner une application en ligne ou un dépôt pour trouver les failles fréquentes du code généré par IA. La GitHub Action commente les PR. Le correcteur Pro applique des corrections vérifiées</p>
+  <div class="meta">
+    <span>Tests, revue et sécurité</span>
+    <span>Vérifié 2026-09-23</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="tests-revue-et-securite" data-search="qodo moteur de revue de code par ia (anciennement codiumai)  tests, revue et sécurité">
+  <div class="card-top">
+    <span class="type">Ressource</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://www.qodo.ai" target="_blank" rel="noopener noreferrer">Qodo</a></h3>
+  <p>Moteur de revue de code par IA (anciennement CodiumAI)</p>
+  <div class="meta">
+    <span>Tests, revue et sécurité</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="tests-revue-et-securite" data-search="semgrep mcp analyse de sécurité mcp via le cli semgrep maintenu mcp tests, revue et sécurité">
+  <div class="card-top">
+    <span class="type">MCP</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://github.com/semgrep/semgrep/tree/develop/cli/src/semgrep/mcp" target="_blank" rel="noopener noreferrer">Semgrep MCP</a></h3>
+  <p>Analyse de sécurité MCP via le CLI Semgrep maintenu</p>
+  <div class="meta">
+    <span>Tests, revue et sécurité</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="tests-revue-et-securite" data-search="sentry inspecter les erreurs d'application et diagnostiquer les échecs mcp tests, revue et sécurité">
+  <div class="card-top">
+    <span class="type">MCP</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://github.com/getsentry/sentry-mcp" target="_blank" rel="noopener noreferrer">Sentry</a></h3>
+  <p>Inspecter les erreurs d'application et diagnostiquer les échecs</p>
+  <div class="meta">
+    <span>Tests, revue et sécurité</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="deploiement-et-execution" data-search="cloudflare gérer le déploiement d'applications et les ressources cloud mcp déploiement et exécution">
+  <div class="card-top">
+    <span class="type">MCP</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://github.com/cloudflare/mcp-server-cloudflare" target="_blank" rel="noopener noreferrer">Cloudflare</a></h3>
+  <p>Gérer le déploiement d'applications et les ressources cloud</p>
+  <div class="meta">
+    <span>Déploiement et exécution</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="deploiement-et-execution" data-search="e2b sandbox cloud sécurisée pour agents ia de niveau entreprise  déploiement et exécution">
+  <div class="card-top">
+    <span class="type">Ressource</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://github.com/e2b-dev/E2B" target="_blank" rel="noopener noreferrer">E2B</a></h3>
+  <p>Sandbox cloud sécurisée pour agents IA de niveau entreprise</p>
+  <div class="meta">
+    <span>Déploiement et exécution</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="deploiement-et-execution" data-search="publish.my publication de sites statiques pilotée par agents, avec activation par email web déploiement et exécution">
+  <div class="card-top">
+    <span class="type">Web</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://publish.my/" target="_blank" rel="noopener noreferrer">Publish.my</a></h3>
+  <p>Publication de sites statiques pilotée par agents, avec activation par email</p>
+  <div class="meta">
+    <span>Déploiement et exécution</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="deploiement-et-execution" data-search="xcodebuildmcp outils cli et mcp pour compiler, exécuter et déboguer des projets apple mcp déploiement et exécution">
+  <div class="card-top">
+    <span class="type">MCP</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://github.com/getsentry/XcodeBuildMCP" target="_blank" rel="noopener noreferrer">XcodeBuildMCP</a></h3>
+  <p>Outils CLI et MCP pour compiler, exécuter et déboguer des projets Apple</p>
+  <div class="meta">
+    <span>Déploiement et exécution</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="espaces-de-travail-et-usage-des-agents" data-search="delta (zed) lancer des fils d'agents et relire leurs changements dans un espace de travail multijoueur qui relie conversation et historique du code. compatible avec les dépôts git existants desktop espaces de travail et usage des agents">
+  <div class="card-top">
+    <span class="type">Desktop</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://delta.dev/" target="_blank" rel="noopener noreferrer">Delta (Zed)</a></h3>
+  <p>Lancer des fils d'agents et relire leurs changements dans un espace de travail multijoueur qui relie conversation et historique du code. Compatible avec les dépôts Git existants</p>
+  <div class="meta">
+    <span>Espaces de travail et usage des agents</span>
+    <span>Vérifié 2026-09-20</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="espaces-de-travail-et-usage-des-agents" data-search="duckweed exécuter agents de code, shells, diffs git et sessions dans un espace de travail local multiplateforme desktop espaces de travail et usage des agents">
+  <div class="card-top">
+    <span class="type">Desktop</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://github.com/MusicMaster4/Duckweed" target="_blank" rel="noopener noreferrer">Duckweed</a></h3>
+  <p>Exécuter agents de code, shells, diffs Git et sessions dans un espace de travail local multiplateforme</p>
+  <div class="meta">
+    <span>Espaces de travail et usage des agents</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="espaces-de-travail-et-usage-des-agents" data-search="llm.log inspecter les coûts, tokens et traces de requêtes des modèles via un proxy local  espaces de travail et usage des agents">
+  <div class="card-top">
+    <span class="type">Ressource</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://github.com/lanesket/llm.log" target="_blank" rel="noopener noreferrer">llm.log</a></h3>
+  <p>Inspecter les coûts, tokens et traces de requêtes des modèles via un proxy local</p>
+  <div class="meta">
+    <span>Espaces de travail et usage des agents</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="espaces-de-travail-et-usage-des-agents" data-search="parallel code exécuter des agents de code dans des worktrees git isolés et relire leurs changements desktop espaces de travail et usage des agents">
+  <div class="card-top">
+    <span class="type">Desktop</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://github.com/johannesjo/parallel-code" target="_blank" rel="noopener noreferrer">Parallel Code</a></h3>
+  <p>Exécuter des agents de code dans des worktrees Git isolés et relire leurs changements</p>
+  <div class="meta">
+    <span>Espaces de travail et usage des agents</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="espaces-de-travail-et-usage-des-agents" data-search="shep orchestrer des agents de code en parallèle dans des worktrees git isolés, jusqu'au commit, au push, au suivi ci et aux brouillons de pr cli espaces de travail et usage des agents">
+  <div class="card-top">
+    <span class="type">CLI</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://github.com/shep-ai/shep" target="_blank" rel="noopener noreferrer">Shep</a></h3>
+  <p>Orchestrer des agents de code en parallèle dans des worktrees Git isolés, jusqu'au commit, au push, au suivi CI et aux brouillons de PR</p>
+  <div class="meta">
+    <span>Espaces de travail et usage des agents</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="espaces-de-travail-et-usage-des-agents" data-search="superagent utiliser claude code ou codex dans un espace de travail macos avec outils navigateur et ios desktop espaces de travail et usage des agents">
+  <div class="card-top">
+    <span class="type">Desktop</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://github.com/pungme/superagent-desktop" target="_blank" rel="noopener noreferrer">Superagent</a></h3>
+  <p>Utiliser Claude Code ou Codex dans un espace de travail macOS avec outils navigateur et iOS</p>
+  <div class="meta">
+    <span>Espaces de travail et usage des agents</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="espaces-de-travail-et-usage-des-agents" data-search="usage voir les quotas des agents de code depuis la barre de menu macos ou la zone de notification windows desktop espaces de travail et usage des agents">
+  <div class="card-top">
+    <span class="type">Desktop</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://github.com/aqua5230/usage" target="_blank" rel="noopener noreferrer">usage</a></h3>
+  <p>Voir les quotas des agents de code depuis la barre de menu macOS ou la zone de notification Windows</p>
+  <div class="meta">
+    <span>Espaces de travail et usage des agents</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="espaces-de-travail-et-usage-des-agents" data-search="warp terminal utiliser un terminal orienté agents et inspecter les workflows de code  espaces de travail et usage des agents">
+  <div class="card-top">
+    <span class="type">Ressource</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://www.warp.dev/terminal" target="_blank" rel="noopener noreferrer">Warp Terminal</a></h3>
+  <p>Utiliser un terminal orienté agents et inspecter les workflows de code</p>
+  <div class="meta">
+    <span>Espaces de travail et usage des agents</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="premier-projet" data-search="ai book: ai coding manuel en chinois sur les workflows d'agents de code, le choix des outils et les pratiques avec cursor, codex, claude code et kiro guide premier projet">
+  <div class="card-top">
+    <span class="type">Guide</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://aibook.ren/categories/ai-coding" target="_blank" rel="noopener noreferrer">AI Book: AI Coding</a></h3>
+  <p>Manuel en chinois sur les workflows d'agents de code, le choix des outils et les pratiques avec Cursor, Codex, Claude Code et Kiro</p>
+  <div class="meta">
+    <span>Premier projet</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="premier-projet" data-search="vibe coding manual (roboco) workflow en coréen et modèles de règles de projet. exemples datés guide premier projet">
+  <div class="card-top">
+    <span class="type">Guide</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://roboco.io/posts/vibe-coding-manual/" target="_blank" rel="noopener noreferrer">Vibe Coding Manual (Roboco)</a></h3>
+  <p>Workflow en coréen et modèles de règles de projet. Exemples datés</p>
+  <div class="meta">
+    <span>Premier projet</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="premier-projet" data-search="vibe coding with confidence (mahmoud zalt) manuel de développement avec chapitres d'introduction accessibles et contenu avancé payant guide premier projet">
+  <div class="card-top">
+    <span class="type">Guide</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://zalt.me/guides/vibe-coding" target="_blank" rel="noopener noreferrer">Vibe Coding with Confidence (Mahmoud Zalt)</a></h3>
+  <p>Manuel de développement avec chapitres d'introduction accessibles et contenu avancé payant</p>
+  <div class="meta">
+    <span>Premier projet</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="workflows-pratiques" data-search="agentic coding recommendations (armin ronacher) workflows d'agents pratiques et conseils de tests. point de vue d'un praticien, 2025 guide workflows pratiques">
+  <div class="card-top">
+    <span class="type">Guide</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://lucumr.pocoo.org/2025/6/12/agentic-coding/" target="_blank" rel="noopener noreferrer">Agentic Coding Recommendations (Armin Ronacher)</a></h3>
+  <p>Workflows d'agents pratiques et conseils de tests. Point de vue d'un praticien, 2025</p>
+  <div class="meta">
+    <span>Workflows pratiques</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="workflows-pratiques" data-search="here's how i use llms to help me write code (simon willison) pratiques itératives de code et de qa. les exemples d'outils de 2025 sont historiques guide workflows pratiques">
+  <div class="card-top">
+    <span class="type">Guide</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://simonwillison.net/2025/Mar/11/using-llms-for-code/" target="_blank" rel="noopener noreferrer">Here's how I use LLMs to help me write code (Simon Willison)</a></h3>
+  <p>Pratiques itératives de code et de QA. Les exemples d'outils de 2025 sont historiques</p>
+  <div class="meta">
+    <span>Workflows pratiques</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="workflows-pratiques" data-search="secure vibe coding guide (csa) checklist de sécurité sur les secrets, les autorisations, la validation et la revue guide workflows pratiques">
+  <div class="card-top">
+    <span class="type">Guide</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://cloudsecurityalliance.org/blog/2025/04/09/secure-vibe-coding-guide" target="_blank" rel="noopener noreferrer">Secure Vibe Coding Guide (CSA)</a></h3>
+  <p>Checklist de sécurité sur les secrets, les autorisations, la validation et la revue</p>
+  <div class="meta">
+    <span>Workflows pratiques</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="concepts-et-recherche" data-search="context engineering intro (coleam00) exemples de contexte de projet et d'instructions pour agents de code guide concepts et recherche">
+  <div class="card-top">
+    <span class="type">Guide</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://github.com/coleam00/context-engineering-intro" target="_blank" rel="noopener noreferrer">Context Engineering Intro (coleam00)</a></h3>
+  <p>Exemples de contexte de projet et d'instructions pour agents de code</p>
+  <div class="meta">
+    <span>Concepts et recherche</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="concepts-et-recherche" data-search="documentation du model context protocol introduction officielle actuelle à l'architecture et aux intégrations mcp guide concepts et recherche">
+  <div class="card-top">
+    <span class="type">Guide</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://modelcontextprotocol.io/docs/2026-07-28/getting-started/intro" target="_blank" rel="noopener noreferrer">Documentation du Model Context Protocol</a></h3>
+  <p>Introduction officielle actuelle à l'architecture et aux intégrations MCP</p>
+  <div class="meta">
+    <span>Concepts et recherche</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="concepts-et-recherche" data-search="swe-agent: agent-computer interfaces enable automated software engineering agent autonome qui corrige de vrais bugs avec une agent-computer interface paper concepts et recherche">
+  <div class="card-top">
+    <span class="type">Paper</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://arxiv.org/abs/2405.15793" target="_blank" rel="noopener noreferrer">SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering</a></h3>
+  <p>Agent autonome qui corrige de vrais bugs avec une Agent-Computer Interface</p>
+  <div class="meta">
+    <span>Concepts et recherche</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="concepts-et-recherche" data-search="swe-bench: can language models resolve real-world github issues? benchmark de référence pour évaluer les agents de code ia paper concepts et recherche">
+  <div class="card-top">
+    <span class="type">Paper</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://arxiv.org/abs/2310.06770" target="_blank" rel="noopener noreferrer">SWE-bench: Can Language Models Resolve Real-World GitHub Issues?</a></h3>
+  <p>Benchmark de référence pour évaluer les agents de code IA</p>
+  <div class="meta">
+    <span>Concepts et recherche</span>
+    <span>Vérifié 2026-09-18</span>
+  </div>
+</article>
+
+<article class="tool-card" data-category="concepts-et-recherche" data-search="vdlc — vibe-driven development lifecycle (roboco) cadre de cycle de vie qui traite l'intention et le contexte comme artefacts principaux. six étapes avec validation humaine à l'approbation du plan, à la revue finale et au déploiement. trilingue en/ko/ja guide concepts et recherche">
+  <div class="card-top">
+    <span class="type">Guide</span>
+    <span class="arrow" aria-hidden="true">↗</span>
+  </div>
+  <h3><a href="https://vdlc.roboco.io/" target="_blank" rel="noopener noreferrer">VDLC — Vibe-Driven Development Lifecycle (Roboco)</a></h3>
+  <p>Cadre de cycle de vie qui traite l'intention et le contexte comme artefacts principaux. Six étapes avec validation humaine à l'approbation du plan, à la revue finale et au déploiement. Trilingue EN/KO/JA</p>
+  <div class="meta">
+    <span>Concepts et recherche</span>
+    <span>Vérifié 2026-10-04</span>
+  </div>
+</article></div>
+      <p id="empty" class="empty">Aucune ressource ne correspond à cette recherche.</p>
+    </main>
+
+    <section class="principles">
+      <h2>Le workflow qui garde le contrôle.</h2>
+      <div class="steps">
+        <div class="step"><b>01 · CADRER</b><span>Définir l’objectif et les critères d’acceptation.</span></div>
+        <div class="step"><b>02 · CONTEXTUALISER</b><span>Donner à l’agent les règles et les documents utiles.</span></div>
+        <div class="step"><b>03 · VÉRIFIER</b><span>Relire, tester et examiner les zones sensibles.</span></div>
+        <div class="step"><b>04 · LIVRER</b><span>Déployer une petite version observable, puis itérer.</span></div>
+      </div>
+    </section>
+
+    <footer>
+      <p>Contenu adapté de <a href="https://github.com/Scap-Mehdi/awesome-vibecoding" target="_blank" rel="noopener noreferrer">Awesome Vibe Coding</a>, publié sous CC0 1.0.</p>
+      <p><a href="index.html">← Accueil</a></p>
+    </footer>
+  </div>
+  <script>
+    const search = document.querySelector('#search');
+    const filters = [...document.querySelectorAll('.filter')];
+    const cards = [...document.querySelectorAll('.tool-card')];
+    const empty = document.querySelector('#empty');
+    let active = 'all';
+    const apply = () => {
+      const query = search.value.trim().toLowerCase();
+      let shown = 0;
+      cards.forEach(card => {
+        const matchCategory = active === 'all' || card.dataset.category === active;
+        const matchQuery = !query || card.dataset.search.includes(query);
+        card.hidden = !(matchCategory && matchQuery);
+        if (!card.hidden) shown++;
+      });
+      empty.classList.toggle('visible', shown === 0);
+    };
+    search.addEventListener('input', apply);
+    filters.forEach(button => button.addEventListener('click', () => {
+      active = button.dataset.filter;
+      filters.forEach(item => item.classList.toggle('active', item === button));
+      apply();
+    }));
+  </script>
+</body>
+</html>
