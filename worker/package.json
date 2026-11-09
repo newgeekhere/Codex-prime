@@ -1,0 +1,7 @@
+{
+  "name": "codex-prime-worker",
+  "private": true,
+  "type": "module",
+  "scripts": { "test": "node --test", "check": "node --check index.js && node --test" },
+  "devDependencies": { "wrangler": "^4.0.0" }
+}
