@@ -20,7 +20,7 @@ function validate(record) {
   }
   return null;
 }
-function configured(env) { return !!(env.FICHES && env.COMMENTAIRES && env.ACCESS_TEAM_DOMAIN && env.ACCESS_AUD && env.ACCESS_ALLOWED_EMAILS); }
+function configured(env) { return !!(env.DATA && env.ACCESS_TEAM_DOMAIN && env.ACCESS_AUD && env.ACCESS_ALLOWED_EMAILS); }
 async function authorized(request, env) {
   if (!configured(env)) return false;
   const token = request.headers.get('Cf-Access-Jwt-Assertion');
@@ -45,10 +45,10 @@ export default {
   const u = new URL(request.url), parts = u.pathname.split('/').filter(Boolean);
   if (parts[0] !== 'api') return response({error:'Not found'},404,headers);
   if (request.method === 'GET' && parts.length === 1) {
-   if (!env.FICHES || !env.COMMENTAIRES) return response({records:[],comments:[],writable:false},200,headers);
-   const [objects, commentObjects] = await Promise.all([env.FICHES.list({prefix:'tool/'}),env.COMMENTAIRES.list({prefix:'comment/'})]);
-   const read = async (bucket, list) => Promise.all(list.objects.map(async o => { const v=await bucket.get(o.key); try{return JSON.parse(await v.text())}catch{return null} }));
-   const [records,comments]=await Promise.all([read(env.FICHES,objects),read(env.COMMENTAIRES,commentObjects)]);
+   if (!env.DATA) return response({records:[],comments:[],writable:false},200,headers);
+   const [objects, commentObjects] = await Promise.all([env.DATA.list({prefix:'fiches/'}),env.DATA.list({prefix:'commentaires/'})]);
+   const read = async (list) => Promise.all(list.objects.map(async o => { const v=await env.DATA.get(o.key); try{return JSON.parse(await v.text())}catch{return null} }));
+   const [records,comments]=await Promise.all([read(objects),read(commentObjects)]);
    return response({records:records.filter(Boolean),comments:comments.filter(Boolean),writable:false},200,headers);
   }
   if (parts.length >= 2 && parts[1] === 'initialize' && request.method === 'POST') {
@@ -56,13 +56,13 @@ export default {
    const body=await request.text(); if(body.length>MAX_BODY)return response({error:'Requête trop volumineuse'},413,headers);
    let records;try{records=JSON.parse(body)}catch{return response({error:'JSON invalide'},400,headers)}
    if(!Array.isArray(records)||records.length>200)return response({error:'Liste invalide'},400,headers);
-   let created=0; for(const r of records){const err=validate(r);if(err||!/^outil-[a-f0-9]{16}$/.test(r.outilId))return response({error:err||'Identifiant invalide'},400,headers);const key=`tool/${r.outilId}.json`;if(await env.FICHES.get(key))continue;await env.FICHES.put(key,JSON.stringify({...r,version:1}));created++;}
+   let created=0; for(const r of records){const err=validate(r);if(err||!/^outil-[a-f0-9]{16}$/.test(r.outilId))return response({error:err||'Identifiant invalide'},400,headers);const key=`fiches/${r.outilId}.json`;if(await env.DATA.get(key))continue;await env.DATA.put(key,JSON.stringify({...r,version:1}),{onlyIf:{etagDoesNotMatch:'*'}});created++;}
    return response({created},200,headers);
   }
-  const id=parts[1], key=`tool/${id}.json`;
+  const id=parts[1], key=`fiches/${id}.json`;
   if(!/^outil-[a-f0-9]{16}$/.test(id||''))return response({error:'Identifiant invalide'},400,headers);
-  if(request.method==='PUT'&&parts.length===2){if(!await authorized(request,env))return response({error:'Non autorisé'},403,headers);const body=await request.text();if(body.length>MAX_BODY)return response({error:'Requête trop volumineuse'},413,headers);let next;try{next=JSON.parse(body)}catch{return response({error:'JSON invalide'},400,headers)}const err=validate(next);if(err)return response({error:err},400,headers);if(next.outilId!==id)return response({error:'Identifiant immuable'},400,headers);const current=await env.FICHES.get(key);if(!current)return response({error:'Fiche introuvable'},404,headers);const old=JSON.parse(await current.text()), expected=Number(request.headers.get('If-Match'));if(!Number.isInteger(expected)||expected!==old.version)return response({error:'Conflit : une version plus récente existe.',current:old},409,headers);const saved={...next,version:old.version+1};await env.FICHES.put(key,JSON.stringify(saved));return response(saved,200,headers);}
-  if(request.method==='POST'&&parts.length===3&&parts[2]==='comments'){if(!await authorized(request,env))return response({error:'Non autorisé'},403,headers);if(!await env.FICHES.get(key))return response({error:'Fiche introuvable'},404,headers);const body=await request.text();if(body.length>4000)return response({error:'Commentaire trop long'},413,headers);let data;try{data=JSON.parse(body)}catch{return response({error:'JSON invalide'},400,headers)}if(typeof data.text!=='string'||!data.text.trim()||data.text.length>2000)return response({error:'Commentaire invalide'},400,headers);const comment={commentId:crypto.randomUUID(),outilId:id,text:data.text.trim(),createdAt:new Date().toISOString()};await env.COMMENTAIRES.put(`comment/${id}/${comment.commentId}.json`,JSON.stringify(comment));return response(comment,201,headers);}
+  if(request.method==='PUT'&&parts.length===2){if(!await authorized(request,env))return response({error:'Non autorisé'},403,headers);const body=await request.text();if(body.length>MAX_BODY)return response({error:'Requête trop volumineuse'},413,headers);let next;try{next=JSON.parse(body)}catch{return response({error:'JSON invalide'},400,headers)}const err=validate(next);if(err)return response({error:err},400,headers);if(next.outilId!==id)return response({error:'Identifiant immuable'},400,headers);const current=await env.DATA.get(key);if(!current)return response({error:'Fiche introuvable'},404,headers);const old=JSON.parse(await current.text()), expected=Number(request.headers.get('If-Match'));if(!Number.isInteger(expected)||expected!==old.version)return response({error:'Conflit : une version plus récente existe.',current:old},409,headers);const saved={...next,version:old.version+1};await env.DATA.put(key,JSON.stringify(saved),{onlyIf:{etagMatches:current.etag}});return response(saved,200,headers);}
+  if(request.method==='POST'&&parts.length===3&&parts[2]==='comments'){if(!await authorized(request,env))return response({error:'Non autorisé'},403,headers);if(!await env.DATA.get(key))return response({error:'Fiche introuvable'},404,headers);const body=await request.text();if(body.length>4000)return response({error:'Commentaire trop long'},413,headers);let data;try{data=JSON.parse(body)}catch{return response({error:'JSON invalide'},400,headers)}if(typeof data.text!=='string'||!data.text.trim()||data.text.length>2000)return response({error:'Commentaire invalide'},400,headers);const comment={commentId:crypto.randomUUID(),outilId:id,text:data.text.trim(),createdAt:new Date().toISOString()};await env.DATA.put(`commentaires/${id}/${comment.commentId}.json`,JSON.stringify(comment));return response(comment,201,headers);}
   return response({error:'Not found'},404,headers);
  }
 };

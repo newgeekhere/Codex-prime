@@ -11,7 +11,9 @@
     // "ACCESS_ALLOWED_EMAILS": "<authorized-email>"
   },
   "r2_buckets": [
-    { "binding": "FICHES", "bucket_name": "formation-s4-donnees-mon-groupe" },
-    { "binding": "COMMENTAIRES", "bucket_name": "formation-s4-donnees-mon-groupe" }
+    {
+      "binding": "DATA",
+      "bucket_name": "formation-s4-donnees-mon-groupe"
+    }
   ]
 }
