@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "codex-prime",
-  "main": "src/index.js",
+  "main": "index.js",
   "compatibility_date": "2026-11-09",
   "vars": {
     "ALLOWED_ORIGIN": "https://newgeekhere.github.io"

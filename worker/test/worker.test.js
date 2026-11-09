@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import worker from '../src/index.js';
+import worker from '../index.js';
 
 function bucket() {
   const data = new Map();
