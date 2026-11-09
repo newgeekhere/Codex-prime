@@ -29,4 +29,8 @@ test('HTML inventory has a fixed ID and both actions for each catalog item', asy
  assert.equal((html.match(/data-action="edit"/g)||[]).length,54);
  assert.equal((html.match(/data-action="comment"/g)||[]).length,54);
  assert.equal((html.match(/data-outil-id="outil-[a-f0-9]{16}"/g)||[]).length,162);
+ assert.match(html,/turnstileSiteKey='0x4AAAAAAF6HheU0hxAIjwhO'/);
+ assert.match(html,/action:'soumission'/);
+ assert.match(html,/turnstileToken\}\)/);
+ assert.match(html,/api\.js\?render=explicit&amp;onload=onTurnstileLoaded/);
 });

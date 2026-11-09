@@ -4,7 +4,9 @@
   "main": "index.js",
   "compatibility_date": "2026-11-09",
   "vars": {
-    "ALLOWED_ORIGIN": "https://newgeekhere.github.io"
+    "ALLOWED_ORIGIN": "https://newgeekhere.github.io",
+    "TURNSTILE_HOSTNAME": "newgeekhere.github.io",
+    "TURNSTILE_ACTION": "soumission"
     // Configure these values for the Cloudflare Access application before enabling writes:
     // "ACCESS_TEAM_DOMAIN": "<team>.cloudflareaccess.com",
     // "ACCESS_AUD": "<application-aud>",

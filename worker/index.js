@@ -3,7 +3,7 @@ const LIMITS = { name: 160, url: 2048, description: 2000, type: 64, category: 12
 const cors = (request, env) => {
   const origin = request.headers.get('Origin');
   const allowed = (env.ALLOWED_ORIGIN || '').split(',').map(x => x.trim()).filter(Boolean);
-  return origin && allowed.includes(origin) ? { 'Access-Control-Allow-Origin': origin, 'Vary': 'Origin', 'Access-Control-Allow-Methods': 'GET, PUT, POST, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type, If-Match, Cf-Access-Jwt-Assertion' } : {};
+  return origin && allowed.includes(origin) ? { 'Access-Control-Allow-Origin': origin, 'Access-Control-Allow-Credentials': 'true', 'Vary': 'Origin', 'Access-Control-Allow-Methods': 'GET, PUT, POST, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type, If-Match, Cf-Access-Jwt-Assertion' } : {};
 };
 function response(data, status, headers = {}) { return new Response(data == null ? null : JSON.stringify(data), { status, headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store', ...headers } }); }
 function validUrl(value) { try { const u = new URL(value); return ['http:', 'https:'].includes(u.protocol) && u.username === '' && u.password === ''; } catch { return false; } }
@@ -21,6 +21,20 @@ function validate(record) {
   return null;
 }
 function configured(env) { return !!(env.DATA && env.ACCESS_TEAM_DOMAIN && env.ACCESS_AUD && env.ACCESS_ALLOWED_EMAILS); }
+async function verifyTurnstile(token, env) {
+  if (!env.TURNSTILE_SECRET_KEY || !env.TURNSTILE_HOSTNAME) return { status: 503, error: 'Turnstile n’est pas configuré côté serveur.' };
+  if (typeof token !== 'string' || !token || token.length > 2048) return { status: 403, error: 'Validation anti-robot manquante.' };
+  try {
+    const result = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST', body: new URLSearchParams({ secret: env.TURNSTILE_SECRET_KEY, response: token }),
+      signal: AbortSignal.timeout(10000)
+    });
+    if (!result.ok) return { status: 502, error: 'Vérification anti-robot indisponible.' };
+    const data = await result.json();
+    if (!data.success || data.hostname !== env.TURNSTILE_HOSTNAME || data.action !== (env.TURNSTILE_ACTION || 'soumission')) return { status: 403, error: 'Validation anti-robot refusée.' };
+    return null;
+  } catch { return { status: 502, error: 'Vérification anti-robot indisponible.' }; }
+}
 async function authorized(request, env) {
   if (!configured(env)) return false;
   const token = request.headers.get('Cf-Access-Jwt-Assertion');
@@ -61,8 +75,8 @@ export default {
   }
   const id=parts[1], key=`fiches/${id}.json`;
   if(!/^outil-[a-f0-9]{16}$/.test(id||''))return response({error:'Identifiant invalide'},400,headers);
-  if(request.method==='PUT'&&parts.length===2){if(!await authorized(request,env))return response({error:'Non autorisé'},403,headers);const body=await request.text();if(body.length>MAX_BODY)return response({error:'Requête trop volumineuse'},413,headers);let next;try{next=JSON.parse(body)}catch{return response({error:'JSON invalide'},400,headers)}const err=validate(next);if(err)return response({error:err},400,headers);if(next.outilId!==id)return response({error:'Identifiant immuable'},400,headers);const current=await env.DATA.get(key);if(!current)return response({error:'Fiche introuvable'},404,headers);const old=JSON.parse(await current.text()), expected=Number(request.headers.get('If-Match'));if(!Number.isInteger(expected)||expected!==old.version)return response({error:'Conflit : une version plus récente existe.',current:old},409,headers);const saved={...next,version:old.version+1};await env.DATA.put(key,JSON.stringify(saved),{onlyIf:{etagMatches:current.etag}});return response(saved,200,headers);}
-  if(request.method==='POST'&&parts.length===3&&parts[2]==='comments'){if(!await authorized(request,env))return response({error:'Non autorisé'},403,headers);if(!await env.DATA.get(key))return response({error:'Fiche introuvable'},404,headers);const body=await request.text();if(body.length>4000)return response({error:'Commentaire trop long'},413,headers);let data;try{data=JSON.parse(body)}catch{return response({error:'JSON invalide'},400,headers)}if(typeof data.text!=='string'||!data.text.trim()||data.text.length>2000)return response({error:'Commentaire invalide'},400,headers);const comment={commentId:crypto.randomUUID(),outilId:id,text:data.text.trim(),createdAt:new Date().toISOString()};await env.DATA.put(`commentaires/${id}/${comment.commentId}.json`,JSON.stringify(comment));return response(comment,201,headers);}
+  if(request.method==='PUT'&&parts.length===2){if(!await authorized(request,env))return response({error:'Non autorisé'},403,headers);const body=await request.text();if(body.length>MAX_BODY)return response({error:'Requête trop volumineuse'},413,headers);let next;try{next=JSON.parse(body)}catch{return response({error:'JSON invalide'},400,headers)}const turnstileError=await verifyTurnstile(next?.turnstileToken,env);if(turnstileError)return response({error:turnstileError.error},turnstileError.status,headers);const {turnstileToken,...record}=next;const err=validate(record);if(err)return response({error:err},400,headers);if(record.outilId!==id)return response({error:'Identifiant immuable'},400,headers);const current=await env.DATA.get(key);if(!current)return response({error:'Fiche introuvable'},404,headers);const old=JSON.parse(await current.text()), expected=Number(request.headers.get('If-Match'));if(!Number.isInteger(expected)||expected!==old.version)return response({error:'Conflit : une version plus récente existe.',current:old},409,headers);const saved={...record,version:old.version+1};await env.DATA.put(key,JSON.stringify(saved),{onlyIf:{etagMatches:current.etag}});return response(saved,200,headers);}
+  if(request.method==='POST'&&parts.length===3&&parts[2]==='comments'){if(!await authorized(request,env))return response({error:'Non autorisé'},403,headers);if(!await env.DATA.get(key))return response({error:'Fiche introuvable'},404,headers);const body=await request.text();if(body.length>4000)return response({error:'Commentaire trop long'},413,headers);let data;try{data=JSON.parse(body)}catch{return response({error:'JSON invalide'},400,headers)}const turnstileError=await verifyTurnstile(data?.turnstileToken,env);if(turnstileError)return response({error:turnstileError.error},turnstileError.status,headers);if(typeof data.text!=='string'||!data.text.trim()||data.text.length>2000)return response({error:'Commentaire invalide'},400,headers);const comment={commentId:crypto.randomUUID(),outilId:id,text:data.text.trim(),createdAt:new Date().toISOString()};await env.DATA.put(`commentaires/${id}/${comment.commentId}.json`,JSON.stringify(comment));return response(comment,201,headers);}
   return response({error:'Not found'},404,headers);
  }
 };
