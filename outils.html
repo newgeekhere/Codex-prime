@@ -34,6 +34,7 @@
     @media(max-width:620px){.nav-links a:first-child{display:none}.hero{gap:38px}.statbar{grid-template-columns:1fr}.stat+.stat{border-left:0;border-top:1px solid var(--line)}.section-head{display:block}.section-head p{margin-top:16px}.catalog{grid-template-columns:1fr}.steps{grid-template-columns:1fr}.nav-links{gap:8px}footer{display:block}footer p+ p{margin-top:18px}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.tool-card{transition:none}}
   </style>
+  <link rel="stylesheet" href="footer.css">
 </head>
 <body>
   <div class="shell">
@@ -854,10 +855,7 @@
       </div>
     </section>
 
-    <footer>
-      <p>Contenu adapté de <a href="https://github.com/Scap-Mehdi/awesome-vibecoding" target="_blank" rel="noopener noreferrer">Awesome Vibe Coding</a>, publié sous CC0 1.0.</p>
-      <p><a href="index.html">← Accueil</a></p>
-    </footer>
+    <p>Contenu adapté de <a href="https://github.com/Scap-Mehdi/awesome-vibecoding">Awesome Vibe Coding</a>, publié sous CC0 1.0.</p>
   </div>
   <script>
     const search = document.querySelector('#search');
@@ -917,5 +915,16 @@
     (async()=>{try{const data=await request('');for(const r of data.records||[]){if(records.has(r.outilId)){records.set(r.outilId,{...r,customFields:r.customFields||{}});updateCard(cards.find(c=>c.dataset.outilId===r.outilId),r)}}for(const c of data.comments||[]){comments.set(c.outilId,[...(comments.get(c.outilId)||[]),c]);renderComments(c.outilId)}}catch{/* Static catalogue stays readable while the optional API is unavailable. */}})();
   </script>
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&amp;onload=onTurnstileLoaded" async defer></script>
+<footer class="site-footer">
+  <nav aria-label="Pied de page"><ul>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="aide.html">Aide</a></li>
+    <li><a href="info-site.html">Info site</a></li>
+    <li><a href="accessibilite.html">Accessibilité : non conforme</a></li>
+    <li><a href="index.html">Site de Scap</a></li>
+    <li><a href="donnees-personnelles.html">Cookies / Données personnelles</a></li>
+    <li><a href="mentions-legales.html">Mentions légales</a></li>
+  </ul></nav>
+</footer>
 </body>
 </html>
