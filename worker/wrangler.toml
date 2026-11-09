@@ -1,0 +1,18 @@
+name = "codex-prime-catalogue"
+main = "src/index.js"
+compatibility_date = "2026-11-01"
+
+# Writing remains disabled until all Access settings and both R2 buckets exist.
+[vars]
+ALLOWED_ORIGIN = "https://newgeekhere.github.io"
+# ACCESS_TEAM_DOMAIN = "your-team.cloudflareaccess.com"
+# ACCESS_AUD = "<Cloudflare Access application AUD>"
+# ACCESS_ALLOWED_EMAILS = "you@example.com"
+
+[[r2_buckets]]
+binding = "FICHES"
+bucket_name = "codex-prime-fiches"
+
+[[r2_buckets]]
+binding = "COMMENTAIRES"
+bucket_name = "codex-prime-commentaires"
