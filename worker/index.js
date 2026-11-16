@@ -43,7 +43,8 @@ async function authorized(request, env) {
     const [h,p,s] = token.split('.');
     const header = JSON.parse(atob(h.replace(/-/g,'+').replace(/_/g,'/')));
     const payload = JSON.parse(atob(p.replace(/-/g,'+').replace(/_/g,'/')));
-    if (header.alg !== 'RS256' || payload.aud !== env.ACCESS_AUD || payload.iss !== `https://${env.ACCESS_TEAM_DOMAIN}` || payload.exp <= Date.now()/1000) return false;
+    const audiences=Array.isArray(payload.aud)?payload.aud:[payload.aud];
+    if (header.alg !== 'RS256' || payload.type !== 'app' || !audiences.includes(env.ACCESS_AUD) || payload.iss !== `https://${env.ACCESS_TEAM_DOMAIN}` || payload.exp <= Date.now()/1000 || payload.nbf > Date.now()/1000) return false;
     const keys = await fetch(`https://${env.ACCESS_TEAM_DOMAIN}/cdn-cgi/access/certs`).then(r => r.json());
     const jwk = keys.keys.find(k => k.kid === header.kid); if (!jwk) return false;
     const key = await crypto.subtle.importKey('jwk', jwk, { name:'RSASSA-PKCS1-v1_5', hash:'SHA-256' }, false, ['verify']);
@@ -58,12 +59,13 @@ export default {
   if (request.method === 'OPTIONS') return new Response(null,{status:204,headers});
   const u = new URL(request.url), parts = u.pathname.split('/').filter(Boolean);
   if (parts[0] !== 'api') return response({error:'Not found'},404,headers);
-  if (request.method === 'GET' && parts.length === 1) {
+  const catalogRoute = parts[1] === 'outils';
+  if (request.method === 'GET' && (parts.length === 1 || (catalogRoute && parts.length === 2))) {
    if (!env.DATA) return response({records:[],comments:[],writable:false},200,headers);
    const [objects, commentObjects] = await Promise.all([env.DATA.list({prefix:'fiches/'}),env.DATA.list({prefix:'commentaires/'})]);
    const read = async (list) => Promise.all(list.objects.map(async o => { const v=await env.DATA.get(o.key); try{return JSON.parse(await v.text())}catch{return null} }));
    const [records,comments]=await Promise.all([read(objects),read(commentObjects)]);
-   return response({records:records.filter(Boolean),comments:comments.filter(Boolean),writable:false},200,headers);
+   return response({records:records.filter(Boolean),comments:comments.filter(Boolean),writable:configured(env)&&!!env.TURNSTILE_SECRET_KEY},200,headers);
   }
   if (parts.length >= 2 && parts[1] === 'initialize' && request.method === 'POST') {
    if (!await authorized(request,env)) return response({error:'Non autorisé'},403,headers);
@@ -73,10 +75,17 @@ export default {
    let created=0; for(const r of records){const err=validate(r);if(err||!/^outil-[a-f0-9]{16}$/.test(r.outilId))return response({error:err||'Identifiant invalide'},400,headers);const key=`fiches/${r.outilId}.json`;if(await env.DATA.get(key))continue;await env.DATA.put(key,JSON.stringify({...r,version:1}),{onlyIf:{etagDoesNotMatch:'*'}});created++;}
    return response({created},200,headers);
   }
-  const id=parts[1], key=`fiches/${id}.json`;
+  const id=catalogRoute?parts[2]:parts[1], key=`fiches/${id}.json`;
   if(!/^outil-[a-f0-9]{16}$/.test(id||''))return response({error:'Identifiant invalide'},400,headers);
-  if(request.method==='PUT'&&parts.length===2){if(!await authorized(request,env))return response({error:'Non autorisé'},403,headers);const body=await request.text();if(body.length>MAX_BODY)return response({error:'Requête trop volumineuse'},413,headers);let next;try{next=JSON.parse(body)}catch{return response({error:'JSON invalide'},400,headers)}const turnstileError=await verifyTurnstile(next?.turnstileToken,env);if(turnstileError)return response({error:turnstileError.error},turnstileError.status,headers);const {turnstileToken,...record}=next;const err=validate(record);if(err)return response({error:err},400,headers);if(record.outilId!==id)return response({error:'Identifiant immuable'},400,headers);const current=await env.DATA.get(key);if(!current)return response({error:'Fiche introuvable'},404,headers);const old=JSON.parse(await current.text()), expected=Number(request.headers.get('If-Match'));if(!Number.isInteger(expected)||expected!==old.version)return response({error:'Conflit : une version plus récente existe.',current:old},409,headers);const saved={...record,version:old.version+1};await env.DATA.put(key,JSON.stringify(saved),{onlyIf:{etagMatches:current.etag}});return response(saved,200,headers);}
-  if(request.method==='POST'&&parts.length===3&&parts[2]==='comments'){if(!await authorized(request,env))return response({error:'Non autorisé'},403,headers);if(!await env.DATA.get(key))return response({error:'Fiche introuvable'},404,headers);const body=await request.text();if(body.length>4000)return response({error:'Commentaire trop long'},413,headers);let data;try{data=JSON.parse(body)}catch{return response({error:'JSON invalide'},400,headers)}const turnstileError=await verifyTurnstile(data?.turnstileToken,env);if(turnstileError)return response({error:turnstileError.error},turnstileError.status,headers);if(typeof data.text!=='string'||!data.text.trim()||data.text.length>2000)return response({error:'Commentaire invalide'},400,headers);const comment={commentId:crypto.randomUUID(),outilId:id,text:data.text.trim(),createdAt:new Date().toISOString()};await env.DATA.put(`commentaires/${id}/${comment.commentId}.json`,JSON.stringify(comment));return response(comment,201,headers);}
+  const commentsRoute=catalogRoute?parts.length===4&&parts[3]==='commentaires':parts.length===3&&parts[2]==='comments';
+  if(request.method==='GET'&&commentsRoute){
+   if(!env.DATA)return response({comments:[]},200,headers);
+   const objects=await env.DATA.list({prefix:`commentaires/${id}/`});
+   const comments=(await Promise.all(objects.objects.map(async o=>{const value=await env.DATA.get(o.key);try{return JSON.parse(await value.text())}catch{return null}}))).filter(Boolean);
+   return response({comments},200,headers);
+  }
+  if(request.method==='PUT'&&(catalogRoute?parts.length===3:parts.length===2)){if(!await authorized(request,env))return response({error:'Non autorisé'},403,headers);const body=await request.text();if(body.length>MAX_BODY)return response({error:'Requête trop volumineuse'},413,headers);let next;try{next=JSON.parse(body)}catch{return response({error:'JSON invalide'},400,headers)}const turnstileError=await verifyTurnstile(next?.turnstileToken,env);if(turnstileError)return response({error:turnstileError.error},turnstileError.status,headers);const {turnstileToken,...record}=next;const err=validate(record);if(err)return response({error:err},400,headers);if(record.outilId!==id)return response({error:'Identifiant immuable'},400,headers);const current=await env.DATA.get(key);if(!current)return response({error:'Fiche introuvable'},404,headers);const old=JSON.parse(await current.text()), expected=Number(request.headers.get('If-Match'));if(!Number.isInteger(expected)||expected!==old.version)return response({error:'Conflit : une version plus récente existe.',current:old},409,headers);const saved={...record,version:old.version+1};await env.DATA.put(key,JSON.stringify(saved),{onlyIf:{etagMatches:current.etag}});return response(saved,200,headers);}
+  if(request.method==='POST'&&commentsRoute){if(!await authorized(request,env))return response({error:'Non autorisé'},403,headers);if(!await env.DATA.get(key))return response({error:'Fiche introuvable'},404,headers);const body=await request.text();if(body.length>4000)return response({error:'Commentaire trop long'},413,headers);let data;try{data=JSON.parse(body)}catch{return response({error:'JSON invalide'},400,headers)}const turnstileError=await verifyTurnstile(data?.turnstileToken,env);if(turnstileError)return response({error:turnstileError.error},turnstileError.status,headers);if(typeof data.text!=='string'||!data.text.trim()||data.text.length>2000)return response({error:'Commentaire invalide'},400,headers);const comment={commentId:crypto.randomUUID(),outilId:id,text:data.text.trim(),createdAt:new Date().toISOString()};await env.DATA.put(`commentaires/${id}/${comment.commentId}.json`,JSON.stringify(comment));return response(comment,201,headers);}
   return response({error:'Not found'},404,headers);
  }
 };

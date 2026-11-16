@@ -37,6 +37,17 @@ Les écritures restent refusées tant que Cloudflare Access n’est pas configur
 
 Sans ces réglages, l’API de lecture peut répondre, mais les écritures sont désactivées. CORS ou Turnstile seuls ne constituent pas une autorisation.
 
+Les actions de `outils.html` utilisent les routes suivantes sur `codex-prime-api` :
+
+| Action | Route |
+| --- | --- |
+| Lire les fiches et les commentaires | `GET /api/outils` |
+| Modifier une fiche | `PUT /api/outils/<outilId>` |
+| Lire les commentaires d’un outil | `GET /api/outils/<outilId>/commentaires` |
+| Ajouter un commentaire | `POST /api/outils/<outilId>/commentaires` |
+
+Les anciennes routes `/api` et `/api/<outilId>` restent disponibles pendant la transition entre les déploiements du site et du Worker. L’initialisation des fiches R2 utilise `POST /api/initialize` et requiert la même autorisation que les modifications. La page n’active l’envoi que lorsque le Worker indique que sa configuration d’écriture est prête ; chaque écriture reste vérifiée côté serveur.
+
 ## Vérifications locales
 
 Prérequis : Node.js 22 ou plus récent.
