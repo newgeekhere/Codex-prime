@@ -883,7 +883,7 @@
 
     // Identity is frozen in each article. The HTML is the one-time source; an
     // initialization POST can only create absent R2 objects and never replaces them.
-    const API = 'https://codex-prime.minibloom-france.workers.dev/api';
+    const API = 'https://codex-prime-api.minibloom-france.workers.dev/api';
     const fields = ['name','url','description','type','category','verifiedAt'];
     const labels = {name:'Nom',url:'URL',description:'Description',type:'Type',category:'Catégorie',verifiedAt:'Date de vérification'};
     const baseline = cards.map(card => ({outilId:card.dataset.outilId,name:card.querySelector('h3 a').textContent,url:card.querySelector('h3 a').href,description:card.querySelector('p').textContent,type:card.querySelector('.type').textContent,category:card.dataset.category,verifiedAt:card.querySelector('.meta span:last-child').textContent.replace('Vérifié ','').trim(),customFields:{}}));

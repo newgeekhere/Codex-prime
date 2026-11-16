@@ -23,7 +23,7 @@ Le site peut être publié par GitHub Pages depuis la racine. L’URL attendue e
 
 ## Worker et stockage
 
-Le Worker expose l’API de lecture des fiches et commentaires et les routes d’écriture. Le bucket R2 configuré dans `worker/wrangler.jsonc` est `formation-s4-donnees-mon-groupe`. L’initialisation des fiches est idempotente : elle ne remplace pas les fiches déjà présentes.
+Le Worker séparé `codex-prime-api` expose l’API de lecture des fiches et commentaires et les routes d’écriture. `outils.html` utilise `https://codex-prime-api.minibloom-france.workers.dev/api`. Le bucket R2 configuré dans `worker/wrangler.jsonc` est `formation-s4-donnees-mon-groupe`. L’initialisation des fiches est idempotente : elle ne remplace pas les fiches déjà présentes.
 
 Les écritures restent refusées tant que Cloudflare Access n’est pas configuré. Avant d’autoriser les modifications :
 
@@ -33,7 +33,7 @@ Les écritures restent refusées tant que Cloudflare Access n’est pas configur
 4. Dans Turnstile, autoriser l’hôte `newgeekhere.github.io`; le formulaire envoie l’action `soumission`. Définir le secret côté Worker avec `npx wrangler secret put TURNSTILE_SECRET_KEY` depuis `worker/`. La clé de site est publique et se trouve dans `outils.html`; ne pas enregistrer la clé secrète dans le dépôt.
 5. Vérifier que `ALLOWED_ORIGIN` correspond exactement à l’origine de la page publiée.
 6. Vérifier la liaison R2 `DATA` et le nom du bucket dans `wrangler.jsonc`.
-7. Déployer le Worker explicitement depuis `worker/` avec Wrangler, après revue de la configuration. Cette étape est manuelle et n’est pas exécutée par le workflow CI.
+7. Dans GitHub, créer l’environnement `formation`, ajouter `CLOUDFLARE_API_TOKEN` dans **Actions → Secrets** et `CLOUDFLARE_ACCOUNT_ID` dans **Actions → Variables**. Lancer manuellement **Actions → Test and deploy Worker → Run workflow** sur `main` après fusion des changements. Le workflow vérifie le code et le nom du Worker avant le déploiement. La publication GitHub Pages reste séparée.
 
 Sans ces réglages, l’API de lecture peut répondre, mais les écritures sont désactivées. CORS ou Turnstile seuls ne constituent pas une autorisation.
 
