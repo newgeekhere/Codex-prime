@@ -46,7 +46,7 @@ Les actions de `outils.html` utilisent les routes suivantes sur `codex-prime-api
 | Lire les commentaires d’un outil | `GET /api/outils/<outilId>/commentaires` |
 | Ajouter un commentaire | `POST /api/outils/<outilId>/commentaires` |
 
-Les anciennes routes `/api` et `/api/<outilId>` restent disponibles pendant la transition entre les déploiements du site et du Worker. L’initialisation des fiches R2 utilise `POST /api/initialize` et requiert la même autorisation que les modifications. La page n’active l’envoi que lorsque le Worker indique que sa configuration d’écriture est prête ; chaque écriture reste vérifiée côté serveur.
+Les anciennes routes `/api` et `/api/<outilId>` restent disponibles pendant la transition entre les déploiements du site et du Worker. Au premier enregistrement autorisé, la page initialise les fiches manquantes dans R2 via `POST /api/initialize`, puis effectue la modification ou ajoute le commentaire. Cette initialisation ne remplace jamais les fiches déjà présentes. La page n’active l’envoi que lorsque le Worker indique que sa configuration d’écriture est prête ; chaque écriture reste vérifiée côté serveur.
 
 ## Vérifications locales
 

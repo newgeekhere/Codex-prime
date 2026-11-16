@@ -56,6 +56,16 @@ test('authorized update and comment persist, while stale edits conflict', async(
   const catalogue=await worker.fetch(new Request('https://worker.test/api/outils'),e);
   assert.equal((await catalogue.json()).writable,true);
   const headers={'Cf-Access-Jwt-Assertion':token,'Content-Type':'application/json','If-Match':'1'};
+  const initial=Array.from({length:54},(_,i)=>({...record,outilId:`outil-${i.toString(16).padStart(16,'0')}`,description:'x'.repeat(400)}));
+  const initialBody=JSON.stringify(initial);
+  assert.ok(initialBody.length>16_000 && initialBody.length<64_000);
+  const initialize=()=>worker.fetch(new Request('https://worker.test/api/initialize',{method:'POST',headers,body:initialBody}),e);
+  const first=await initialize();
+  assert.equal(first.status,200);
+  assert.equal((await first.json()).created,54);
+  const second=await initialize();
+  assert.equal(second.status,200);
+  assert.equal((await second.json()).created,0);
   const update=await worker.fetch(new Request(`https://worker.test/api/outils/${id}`,{method:'PUT',headers,body:JSON.stringify({...record,turnstileToken:'test-token'})}),e);
   assert.equal(update.status,200);
   assert.equal((await update.json()).version,2);
@@ -84,4 +94,5 @@ test('HTML inventory has a fixed ID and both actions for each catalog item', asy
  assert.match(html,/request\(`\/outils\/\$\{id\}\/commentaires`\)/);
  assert.match(html,/request\(`\/outils\/\$\{editingId\}\/commentaires`/);
  assert.match(html,/request\(`\/outils\/\$\{editingId\}`/);
+ assert.match(html,/await ensureInitialized\(\)/);
 });
