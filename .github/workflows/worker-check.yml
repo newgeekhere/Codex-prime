@@ -1,10 +1,10 @@
 name: Worker checks
 on:
   pull_request:
-    paths: ['worker/**', 'outils.html', '.github/workflows/worker-check.yml']
+    paths: ['worker/**', 'outils.html', '.github/workflows/worker-check.yml', '.github/workflows/deploy-worker.yml']
   push:
     branches: [main, 'feature/**']
-    paths: ['worker/**', 'outils.html', '.github/workflows/worker-check.yml']
+    paths: ['worker/**', 'outils.html', '.github/workflows/worker-check.yml', '.github/workflows/deploy-worker.yml']
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -13,5 +13,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: npm test
+          cache: npm
+          cache-dependency-path: worker/package-lock.json
+      - run: npm ci
+        working-directory: worker
+      - run: npm run check
         working-directory: worker
