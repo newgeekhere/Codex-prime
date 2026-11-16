@@ -1,4 +1,5 @@
 const MAX_BODY = 16_000;
+const MAX_INIT_BODY = 64_000;
 const LIMITS = { name: 160, url: 2048, description: 2000, type: 64, category: 120 };
 const cors = (request, env) => {
   const origin = request.headers.get('Origin');
@@ -69,7 +70,7 @@ export default {
   }
   if (parts.length >= 2 && parts[1] === 'initialize' && request.method === 'POST') {
    if (!await authorized(request,env)) return response({error:'Non autorisé'},403,headers);
-   const body=await request.text(); if(body.length>MAX_BODY)return response({error:'Requête trop volumineuse'},413,headers);
+   const body=await request.text(); if(body.length>MAX_INIT_BODY)return response({error:'Requête trop volumineuse'},413,headers);
    let records;try{records=JSON.parse(body)}catch{return response({error:'JSON invalide'},400,headers)}
    if(!Array.isArray(records)||records.length>200)return response({error:'Liste invalide'},400,headers);
    let created=0; for(const r of records){const err=validate(r);if(err||!/^outil-[a-f0-9]{16}$/.test(r.outilId))return response({error:err||'Identifiant invalide'},400,headers);const key=`fiches/${r.outilId}.json`;if(await env.DATA.get(key))continue;await env.DATA.put(key,JSON.stringify({...r,version:1}),{onlyIf:{etagDoesNotMatch:'*'}});created++;}
