@@ -25,7 +25,7 @@
     .search-wrap{position:relative}.search-wrap span{position:absolute;left:18px;top:50%;transform:translateY(-50%);font-size:1.2rem}.search{width:100%;padding:17px 20px 17px 50px;border:1px solid var(--ink);border-radius:16px;background:var(--card);font:inherit;font-size:1rem;outline:none}.search:focus{box-shadow:0 0 0 4px rgba(111,85,231,.18)}
     .filters{display:flex;gap:9px;overflow-x:auto;padding:12px 0 4px;scrollbar-width:none}.filter{flex:0 0 auto;border:1px solid var(--line);background:var(--card);padding:10px 14px;border-radius:999px;font:inherit;font-size:.78rem;font-weight:800;cursor:pointer}.filter.active{background:var(--ink);color:white;border-color:var(--ink)}
     .catalog{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:18px 0 90px}.tool-card{display:flex;flex-direction:column;min-height:245px;padding:22px;border:1px solid var(--line);border-radius:20px;background:rgba(251,250,246,.88);transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}.tool-card:hover{transform:translateY(-4px);border-color:var(--ink);box-shadow:var(--shadow)}.tool-card[hidden]{display:none}
-    .card-top{display:flex;justify-content:space-between;align-items:center}.type{display:inline-block;padding:6px 9px;border-radius:7px;background:#ece8df;font-size:.68rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em}.arrow{font-size:1.2rem}.tool-card h3{margin:24px 0 10px;font-size:1.42rem;letter-spacing:-.035em}.tool-card h3 a{text-decoration:none}.tool-card h3 a:after{content:"";position:absolute;inset:0;pointer-events:none}.tool-card{position:relative}.tool-card p{margin:0 0 24px;color:var(--muted);line-height:1.5;font-size:.92rem}.meta{display:flex;justify-content:space-between;gap:10px;margin-top:auto;padding-top:15px;border-top:1px solid var(--line);font-size:.67rem;color:var(--muted)}.meta span:last-child{text-align:right}
+    .card-top{display:flex;justify-content:space-between;align-items:center}.type{display:inline-block;padding:6px 9px;border-radius:7px;background:#ece8df;font-size:.68rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em}.arrow{font-size:1.2rem}.tool-card h3{margin:24px 0 10px;font-size:1.42rem;letter-spacing:-.035em}.tool-card h3 a{text-decoration:none}.tool-card h3 a:after{content:"";position:absolute;inset:0;pointer-events:none}.tool-card{position:relative}.tool-card p{margin:0 0 24px;color:var(--muted);line-height:1.5;font-size:.92rem}.meta{display:flex;justify-content:space-between;gap:10px;margin-top:auto;padding-top:15px;border-top:1px solid var(--line);font-size:.67rem;color:var(--muted)}.meta span:nth-of-type(2){text-align:right}
     .empty{display:none;text-align:center;padding:60px 20px 100px;color:var(--muted)}.empty.visible{display:block}
     .tool-actions{display:flex;gap:8px;margin-top:14px;position:relative;z-index:2}.tool-actions button,.editor button{position:relative;z-index:3;border:1px solid var(--ink);background:var(--card);border-radius:999px;padding:9px 12px;font:inherit;font-size:.74rem;font-weight:800;cursor:pointer}.tool-actions button:disabled{opacity:.5;cursor:not-allowed}.comments{font-size:.82rem;color:var(--muted);margin-top:12px;position:relative;z-index:2}.comment{border-top:1px solid var(--line);padding-top:8px;margin-top:8px;white-space:pre-wrap;overflow-wrap:anywhere}.editor-backdrop{position:fixed;inset:0;z-index:20;background:rgba(18,19,16,.55);display:none;align-items:center;justify-content:center;padding:16px}.editor-backdrop.open{display:flex}.editor{width:min(620px,100%);max-height:90vh;overflow:auto;background:var(--card);border:1px solid var(--ink);border-radius:20px;padding:24px;box-shadow:var(--shadow)}.editor h2{margin:0 0 18px}.editor label{display:block;margin:12px 0;font-size:.82rem;font-weight:800}.editor input,.editor textarea{display:block;width:100%;margin-top:6px;padding:10px;border:1px solid var(--line);border-radius:9px;font:inherit}.editor textarea{min-height:90px}.editor-actions{display:flex;gap:8px;margin-top:18px}.editor-status{min-height:1.4em;color:#9c3023;font-size:.85rem}
     .principles{margin:0 0 84px;padding:clamp(28px,5vw,56px);background:var(--ink);color:white;border-radius:28px}.principles h2{margin:0 0 28px;font-size:clamp(2rem,4vw,3.6rem);letter-spacing:-.055em}.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#45463e;border:1px solid #45463e}.step{padding:24px;background:var(--ink)}.step b{display:block;margin-bottom:12px;color:var(--acid);font-size:.75rem;letter-spacing:.12em}.step span{line-height:1.45}
@@ -95,8 +95,9 @@
   <div class="meta">
     <span>Code et édition</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-27b0817e8f7295c2">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-27b0817e8f7295c2">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-27b0817e8f7295c2">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-27b0817e8f7295c2">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-c23f3e7cbb0eb40f" data-category="code-et-edition" data-search="claude code assistant de code agentique avec workflows en terminal et par projet cli code et édition">
@@ -109,8 +110,9 @@
   <div class="meta">
     <span>Code et édition</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-c23f3e7cbb0eb40f">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-c23f3e7cbb0eb40f">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-c23f3e7cbb0eb40f">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-c23f3e7cbb0eb40f">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-533d51d9d3dea76f" data-category="code-et-edition" data-search="cline agent de code pour ide, terminal et desktop, avec outils fichiers, commandes et navigateur  code et édition">
@@ -123,8 +125,9 @@
   <div class="meta">
     <span>Code et édition</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-533d51d9d3dea76f">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-533d51d9d3dea76f">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-533d51d9d3dea76f">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-533d51d9d3dea76f">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-abf0e5309a4f0e36" data-category="code-et-edition" data-search="cursor éditeur et agent de code pour l'implémentation, le débogage et la revue de code ide code et édition">
@@ -137,8 +140,9 @@
   <div class="meta">
     <span>Code et édition</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-abf0e5309a4f0e36">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-abf0e5309a4f0e36">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-abf0e5309a4f0e36">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-abf0e5309a4f0e36">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-24684c1ecca249c0" data-category="code-et-edition" data-search="gemini cli agent de code open source en terminal avec accès par clé api, vertex ou offre entreprise éligible. l'accès par abonnement grand public est retiré cli code et édition">
@@ -151,8 +155,9 @@
   <div class="meta">
     <span>Code et édition</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-24684c1ecca249c0">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-24684c1ecca249c0">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-24684c1ecca249c0">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-24684c1ecca249c0">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-561b4078010f62e3" data-category="code-et-edition" data-search="github copilot assistance au code et workflows d'agents dans github et les ide compatibles  code et édition">
@@ -165,8 +170,9 @@
   <div class="meta">
     <span>Code et édition</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-561b4078010f62e3">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-561b4078010f62e3">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-561b4078010f62e3">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-561b4078010f62e3">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-8782e21ebeda898a" data-category="code-et-edition" data-search="goose agent local extensible avec workflows de code, interfaces desktop et cli, et outils mcp cli code et édition">
@@ -179,8 +185,9 @@
   <div class="meta">
     <span>Code et édition</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-8782e21ebeda898a">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-8782e21ebeda898a">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-8782e21ebeda898a">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-8782e21ebeda898a">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-4105c3b38bd351a9" data-category="code-et-edition" data-search="kiro agent de code aws avec workflows ide et cli, spécifications et tests ide code et édition">
@@ -193,8 +200,9 @@
   <div class="meta">
     <span>Code et édition</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-4105c3b38bd351a9">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-4105c3b38bd351a9">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-4105c3b38bd351a9">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-4105c3b38bd351a9">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-ac8bc5b8d08d758f" data-category="code-et-edition" data-search="openai codex cli agent de code openai qui s'exécute localement dans le terminal cli code et édition">
@@ -207,8 +215,9 @@
   <div class="meta">
     <span>Code et édition</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-ac8bc5b8d08d758f">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-ac8bc5b8d08d758f">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-ac8bc5b8d08d758f">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-ac8bc5b8d08d758f">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-c133b93b912dffd6" data-category="code-et-edition" data-search="pi agent de code en terminal, extensible et intégrable comme harnais cli code et édition">
@@ -221,8 +230,9 @@
   <div class="meta">
     <span>Code et édition</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-c133b93b912dffd6">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-c133b93b912dffd6">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-c133b93b912dffd6">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-c133b93b912dffd6">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-34ea67d75a31b417" data-category="prototypage-d-applications-et-d-interfaces" data-search="bolt.new création d'applications en langage naturel, par stackblitz web prototypage d'applications et d'interfaces">
@@ -235,8 +245,9 @@
   <div class="meta">
     <span>Prototypage d'applications et d'interfaces</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-34ea67d75a31b417">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-34ea67d75a31b417">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-34ea67d75a31b417">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-34ea67d75a31b417">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-aea12527477ebe6f" data-category="prototypage-d-applications-et-d-interfaces" data-search="dyad créer des applications en local avec des fournisseurs de modèles configurables desktop prototypage d'applications et d'interfaces">
@@ -249,8 +260,9 @@
   <div class="meta">
     <span>Prototypage d'applications et d'interfaces</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-aea12527477ebe6f">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-aea12527477ebe6f">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-aea12527477ebe6f">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-aea12527477ebe6f">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-7eb11b6a6b2250c4" data-category="prototypage-d-applications-et-d-interfaces" data-search="lovable génération d'applications full-stack avec supabase web prototypage d'applications et d'interfaces">
@@ -263,8 +275,9 @@
   <div class="meta">
     <span>Prototypage d'applications et d'interfaces</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-7eb11b6a6b2250c4">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-7eb11b6a6b2250c4">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-7eb11b6a6b2250c4">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-7eb11b6a6b2250c4">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-b96c73200cd41eeb" data-category="prototypage-d-applications-et-d-interfaces" data-search="onlook modifier visuellement les interfaces d'une application tout en travaillant sur le code web prototypage d'applications et d'interfaces">
@@ -277,8 +290,9 @@
   <div class="meta">
     <span>Prototypage d'applications et d'interfaces</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-b96c73200cd41eeb">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-b96c73200cd41eeb">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-b96c73200cd41eeb">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-b96c73200cd41eeb">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-b8dc840fe3423002" data-category="prototypage-d-applications-et-d-interfaces" data-search="replit créer et itérer sur des applications avec replit agent web prototypage d'applications et d'interfaces">
@@ -291,8 +305,9 @@
   <div class="meta">
     <span>Prototypage d'applications et d'interfaces</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-b8dc840fe3423002">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-b8dc840fe3423002">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-b8dc840fe3423002">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-b8dc840fe3423002">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-879a793bdc606a46" data-category="prototypage-d-applications-et-d-interfaces" data-search="v0 l'ia de vercel pour générer des ui et du react web prototypage d'applications et d'interfaces">
@@ -305,8 +320,9 @@
   <div class="meta">
     <span>Prototypage d'applications et d'interfaces</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-879a793bdc606a46">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-879a793bdc606a46">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-879a793bdc606a46">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-879a793bdc606a46">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-d3572ea9a1a83519" data-category="contexte-specifications-et-integrations" data-search="caliber cli qui génère et synchronise les configurations d'agents ia pour claude code, cursor et codex  contexte, spécifications et intégrations">
@@ -319,8 +335,9 @@
   <div class="meta">
     <span>Contexte, spécifications et intégrations</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-d3572ea9a1a83519">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-d3572ea9a1a83519">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-d3572ea9a1a83519">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-d3572ea9a1a83519">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-16a7277d62eea8e1" data-category="contexte-specifications-et-integrations" data-search="context7 récupérer la documentation des bibliothèques comme contexte de code mcp contexte, spécifications et intégrations">
@@ -333,8 +350,9 @@
   <div class="meta">
     <span>Contexte, spécifications et intégrations</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-16a7277d62eea8e1">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-16a7277d62eea8e1">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-16a7277d62eea8e1">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-16a7277d62eea8e1">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-df30a77ec522ebf0" data-category="contexte-specifications-et-integrations" data-search="filesystem mcp donner aux agents un accès contrôlé aux fichiers du projet mcp contexte, spécifications et intégrations">
@@ -347,8 +365,9 @@
   <div class="meta">
     <span>Contexte, spécifications et intégrations</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-df30a77ec522ebf0">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-df30a77ec522ebf0">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-df30a77ec522ebf0">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-df30a77ec522ebf0">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-faa318861b48de8d" data-category="contexte-specifications-et-integrations" data-search="github mcp connecter les workflows de dépôts, d'issues et de pull requests mcp contexte, spécifications et intégrations">
@@ -361,8 +380,9 @@
   <div class="meta">
     <span>Contexte, spécifications et intégrations</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-faa318861b48de8d">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-faa318861b48de8d">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-faa318861b48de8d">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-faa318861b48de8d">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-1101a4b8712e0357" data-category="contexte-specifications-et-integrations" data-search="neon connecter les workflows de développement aux bases de données neon mcp contexte, spécifications et intégrations">
@@ -375,8 +395,9 @@
   <div class="meta">
     <span>Contexte, spécifications et intégrations</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-1101a4b8712e0357">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-1101a4b8712e0357">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-1101a4b8712e0357">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-1101a4b8712e0357">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-6328c9f616a7c1c2" data-category="contexte-specifications-et-integrations" data-search="notion mcp mcp officiel hébergé pour chercher, lire et mettre à jour du contenu notion mcp contexte, spécifications et intégrations">
@@ -389,8 +410,9 @@
   <div class="meta">
     <span>Contexte, spécifications et intégrations</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-6328c9f616a7c1c2">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-6328c9f616a7c1c2">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-6328c9f616a7c1c2">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-6328c9f616a7c1c2">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-ed2f687a3182c848" data-category="contexte-specifications-et-integrations" data-search="openspec cadre de développement piloté par les spécifications pour assistants de code ia  contexte, spécifications et intégrations">
@@ -403,8 +425,9 @@
   <div class="meta">
     <span>Contexte, spécifications et intégrations</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-ed2f687a3182c848">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-ed2f687a3182c848">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-ed2f687a3182c848">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-ed2f687a3182c848">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-d6af4d2d99bd8d30" data-category="contexte-specifications-et-integrations" data-search="supabase mcp mcp officiel pour les schémas, requêtes et configurations de projet supabase mcp contexte, spécifications et intégrations">
@@ -417,8 +440,9 @@
   <div class="meta">
     <span>Contexte, spécifications et intégrations</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-d6af4d2d99bd8d30">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-d6af4d2d99bd8d30">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-d6af4d2d99bd8d30">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-d6af4d2d99bd8d30">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-d9ee8202eefe6098" data-category="tests-revue-et-securite" data-search="agent qa écrire et exécuter des tests web et mobile en langage naturel mcp tests, revue et sécurité">
@@ -431,8 +455,9 @@
   <div class="meta">
     <span>Tests, revue et sécurité</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-d9ee8202eefe6098">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-d9ee8202eefe6098">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-d9ee8202eefe6098">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-d9ee8202eefe6098">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-ba31bde2dfc28f63" data-category="tests-revue-et-securite" data-search="playwright mcp (microsoft) automatisation officielle du navigateur par instantanés structurés des pages mcp tests, revue et sécurité">
@@ -445,8 +470,9 @@
   <div class="meta">
     <span>Tests, revue et sécurité</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-ba31bde2dfc28f63">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-ba31bde2dfc28f63">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-ba31bde2dfc28f63">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-ba31bde2dfc28f63">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-19c1fb556084b786" data-category="tests-revue-et-securite" data-search="pr-agent relecteur de pull requests maintenu par la communauté, distinct de qodo  tests, revue et sécurité">
@@ -459,8 +485,9 @@
   <div class="meta">
     <span>Tests, revue et sécurité</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-19c1fb556084b786">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-19c1fb556084b786">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-19c1fb556084b786">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-19c1fb556084b786">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-88cf034bcd895a96" data-category="tests-revue-et-securite" data-search="prbl scanner une application en ligne ou un dépôt pour trouver les failles fréquentes du code généré par ia. la github action commente les pr. le correcteur pro applique des corrections vérifiées web tests, revue et sécurité">
@@ -473,8 +500,9 @@
   <div class="meta">
     <span>Tests, revue et sécurité</span>
     <span>Vérifié 2026-09-23</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-88cf034bcd895a96">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-88cf034bcd895a96">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-88cf034bcd895a96">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-88cf034bcd895a96">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-5a2613880617dda1" data-category="tests-revue-et-securite" data-search="qodo moteur de revue de code par ia (anciennement codiumai)  tests, revue et sécurité">
@@ -487,8 +515,9 @@
   <div class="meta">
     <span>Tests, revue et sécurité</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-5a2613880617dda1">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-5a2613880617dda1">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-5a2613880617dda1">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-5a2613880617dda1">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-334a3611b7b8b2f6" data-category="tests-revue-et-securite" data-search="semgrep mcp analyse de sécurité mcp via le cli semgrep maintenu mcp tests, revue et sécurité">
@@ -501,8 +530,9 @@
   <div class="meta">
     <span>Tests, revue et sécurité</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-334a3611b7b8b2f6">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-334a3611b7b8b2f6">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-334a3611b7b8b2f6">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-334a3611b7b8b2f6">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-426a8effebe5ed6d" data-category="tests-revue-et-securite" data-search="sentry inspecter les erreurs d'application et diagnostiquer les échecs mcp tests, revue et sécurité">
@@ -515,8 +545,9 @@
   <div class="meta">
     <span>Tests, revue et sécurité</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-426a8effebe5ed6d">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-426a8effebe5ed6d">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-426a8effebe5ed6d">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-426a8effebe5ed6d">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-57ccfa678b7f085f" data-category="deploiement-et-execution" data-search="cloudflare gérer le déploiement d'applications et les ressources cloud mcp déploiement et exécution">
@@ -529,8 +560,9 @@
   <div class="meta">
     <span>Déploiement et exécution</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-57ccfa678b7f085f">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-57ccfa678b7f085f">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-57ccfa678b7f085f">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-57ccfa678b7f085f">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-85cfb8c26b1b5b75" data-category="deploiement-et-execution" data-search="e2b sandbox cloud sécurisée pour agents ia de niveau entreprise  déploiement et exécution">
@@ -543,8 +575,9 @@
   <div class="meta">
     <span>Déploiement et exécution</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-85cfb8c26b1b5b75">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-85cfb8c26b1b5b75">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-85cfb8c26b1b5b75">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-85cfb8c26b1b5b75">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-0143bbf77b55b146" data-category="deploiement-et-execution" data-search="publish.my publication de sites statiques pilotée par agents, avec activation par email web déploiement et exécution">
@@ -557,8 +590,9 @@
   <div class="meta">
     <span>Déploiement et exécution</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-0143bbf77b55b146">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-0143bbf77b55b146">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-0143bbf77b55b146">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-0143bbf77b55b146">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-486b50d8b49e00c2" data-category="deploiement-et-execution" data-search="xcodebuildmcp outils cli et mcp pour compiler, exécuter et déboguer des projets apple mcp déploiement et exécution">
@@ -571,8 +605,9 @@
   <div class="meta">
     <span>Déploiement et exécution</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-486b50d8b49e00c2">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-486b50d8b49e00c2">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-486b50d8b49e00c2">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-486b50d8b49e00c2">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-655b7d66a1b2f801" data-category="espaces-de-travail-et-usage-des-agents" data-search="delta (zed) lancer des fils d'agents et relire leurs changements dans un espace de travail multijoueur qui relie conversation et historique du code. compatible avec les dépôts git existants desktop espaces de travail et usage des agents">
@@ -585,8 +620,9 @@
   <div class="meta">
     <span>Espaces de travail et usage des agents</span>
     <span>Vérifié 2026-09-20</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-655b7d66a1b2f801">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-655b7d66a1b2f801">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-655b7d66a1b2f801">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-655b7d66a1b2f801">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-6edb9adcb71ec27b" data-category="espaces-de-travail-et-usage-des-agents" data-search="duckweed exécuter agents de code, shells, diffs git et sessions dans un espace de travail local multiplateforme desktop espaces de travail et usage des agents">
@@ -599,8 +635,9 @@
   <div class="meta">
     <span>Espaces de travail et usage des agents</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-6edb9adcb71ec27b">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-6edb9adcb71ec27b">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-6edb9adcb71ec27b">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-6edb9adcb71ec27b">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-5927b1ac1e928b33" data-category="espaces-de-travail-et-usage-des-agents" data-search="llm.log inspecter les coûts, tokens et traces de requêtes des modèles via un proxy local  espaces de travail et usage des agents">
@@ -613,8 +650,9 @@
   <div class="meta">
     <span>Espaces de travail et usage des agents</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-5927b1ac1e928b33">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-5927b1ac1e928b33">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-5927b1ac1e928b33">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-5927b1ac1e928b33">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-7cbd4f7ea75aedd4" data-category="espaces-de-travail-et-usage-des-agents" data-search="parallel code exécuter des agents de code dans des worktrees git isolés et relire leurs changements desktop espaces de travail et usage des agents">
@@ -627,8 +665,9 @@
   <div class="meta">
     <span>Espaces de travail et usage des agents</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-7cbd4f7ea75aedd4">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-7cbd4f7ea75aedd4">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-7cbd4f7ea75aedd4">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-7cbd4f7ea75aedd4">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-82526d80ec35448a" data-category="espaces-de-travail-et-usage-des-agents" data-search="shep orchestrer des agents de code en parallèle dans des worktrees git isolés, jusqu'au commit, au push, au suivi ci et aux brouillons de pr cli espaces de travail et usage des agents">
@@ -641,8 +680,9 @@
   <div class="meta">
     <span>Espaces de travail et usage des agents</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-82526d80ec35448a">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-82526d80ec35448a">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-82526d80ec35448a">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-82526d80ec35448a">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-d18c25d6c37897b3" data-category="espaces-de-travail-et-usage-des-agents" data-search="superagent utiliser claude code ou codex dans un espace de travail macos avec outils navigateur et ios desktop espaces de travail et usage des agents">
@@ -655,8 +695,9 @@
   <div class="meta">
     <span>Espaces de travail et usage des agents</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-d18c25d6c37897b3">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-d18c25d6c37897b3">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-d18c25d6c37897b3">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-d18c25d6c37897b3">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-56a151a09b3e4f3c" data-category="espaces-de-travail-et-usage-des-agents" data-search="usage voir les quotas des agents de code depuis la barre de menu macos ou la zone de notification windows desktop espaces de travail et usage des agents">
@@ -669,8 +710,9 @@
   <div class="meta">
     <span>Espaces de travail et usage des agents</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-56a151a09b3e4f3c">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-56a151a09b3e4f3c">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-56a151a09b3e4f3c">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-56a151a09b3e4f3c">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-1c7b783629ec29a6" data-category="espaces-de-travail-et-usage-des-agents" data-search="warp terminal utiliser un terminal orienté agents et inspecter les workflows de code  espaces de travail et usage des agents">
@@ -683,8 +725,9 @@
   <div class="meta">
     <span>Espaces de travail et usage des agents</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-1c7b783629ec29a6">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-1c7b783629ec29a6">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-1c7b783629ec29a6">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-1c7b783629ec29a6">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-62eb55844ed349e0" data-category="premier-projet" data-search="ai book: ai coding manuel en chinois sur les workflows d'agents de code, le choix des outils et les pratiques avec cursor, codex, claude code et kiro guide premier projet">
@@ -697,8 +740,9 @@
   <div class="meta">
     <span>Premier projet</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-62eb55844ed349e0">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-62eb55844ed349e0">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-62eb55844ed349e0">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-62eb55844ed349e0">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-884c1a1cc356ef09" data-category="premier-projet" data-search="vibe coding manual (roboco) workflow en coréen et modèles de règles de projet. exemples datés guide premier projet">
@@ -711,8 +755,9 @@
   <div class="meta">
     <span>Premier projet</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-884c1a1cc356ef09">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-884c1a1cc356ef09">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-884c1a1cc356ef09">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-884c1a1cc356ef09">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-2405425a016dcc48" data-category="premier-projet" data-search="vibe coding with confidence (mahmoud zalt) manuel de développement avec chapitres d'introduction accessibles et contenu avancé payant guide premier projet">
@@ -725,8 +770,9 @@
   <div class="meta">
     <span>Premier projet</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-2405425a016dcc48">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-2405425a016dcc48">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-2405425a016dcc48">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-2405425a016dcc48">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-1016b08e6e48891b" data-category="workflows-pratiques" data-search="agentic coding recommendations (armin ronacher) workflows d'agents pratiques et conseils de tests. point de vue d'un praticien, 2025 guide workflows pratiques">
@@ -739,8 +785,9 @@
   <div class="meta">
     <span>Workflows pratiques</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-1016b08e6e48891b">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-1016b08e6e48891b">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-1016b08e6e48891b">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-1016b08e6e48891b">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-56020b6f03ac4245" data-category="workflows-pratiques" data-search="here's how i use llms to help me write code (simon willison) pratiques itératives de code et de qa. les exemples d'outils de 2025 sont historiques guide workflows pratiques">
@@ -753,8 +800,9 @@
   <div class="meta">
     <span>Workflows pratiques</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-56020b6f03ac4245">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-56020b6f03ac4245">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-56020b6f03ac4245">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-56020b6f03ac4245">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-3cf3c8395b3a7211" data-category="workflows-pratiques" data-search="secure vibe coding guide (csa) checklist de sécurité sur les secrets, les autorisations, la validation et la revue guide workflows pratiques">
@@ -767,8 +815,9 @@
   <div class="meta">
     <span>Workflows pratiques</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-3cf3c8395b3a7211">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-3cf3c8395b3a7211">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-3cf3c8395b3a7211">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-3cf3c8395b3a7211">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-b8565aff9938938b" data-category="concepts-et-recherche" data-search="context engineering intro (coleam00) exemples de contexte de projet et d'instructions pour agents de code guide concepts et recherche">
@@ -781,8 +830,9 @@
   <div class="meta">
     <span>Concepts et recherche</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-b8565aff9938938b">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-b8565aff9938938b">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-b8565aff9938938b">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-b8565aff9938938b">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-d2ee308c23dc4fe3" data-category="concepts-et-recherche" data-search="documentation du model context protocol introduction officielle actuelle à l'architecture et aux intégrations mcp guide concepts et recherche">
@@ -795,8 +845,9 @@
   <div class="meta">
     <span>Concepts et recherche</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-d2ee308c23dc4fe3">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-d2ee308c23dc4fe3">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-d2ee308c23dc4fe3">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-d2ee308c23dc4fe3">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-54b1ddaabf07edce" data-category="concepts-et-recherche" data-search="swe-agent: agent-computer interfaces enable automated software engineering agent autonome qui corrige de vrais bugs avec une agent-computer interface paper concepts et recherche">
@@ -809,8 +860,9 @@
   <div class="meta">
     <span>Concepts et recherche</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-54b1ddaabf07edce">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-54b1ddaabf07edce">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-54b1ddaabf07edce">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-54b1ddaabf07edce">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-3e4a5dea3aec490f" data-category="concepts-et-recherche" data-search="swe-bench: can language models resolve real-world github issues? benchmark de référence pour évaluer les agents de code ia paper concepts et recherche">
@@ -823,8 +875,9 @@
   <div class="meta">
     <span>Concepts et recherche</span>
     <span>Vérifié 2026-09-18</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-3e4a5dea3aec490f">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-3e4a5dea3aec490f">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-3e4a5dea3aec490f">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-3e4a5dea3aec490f">Ajouter un commentaire</button></div>
+
 </article>
 
 <article class="tool-card" data-outil-id="outil-fff4a2f75ec6ba88" data-category="concepts-et-recherche" data-search="vdlc — vibe-driven development lifecycle (roboco) cadre de cycle de vie qui traite l'intention et le contexte comme artefacts principaux. six étapes avec validation humaine à l'approbation du plan, à la revue finale et au déploiement. trilingue en/ko/ja guide concepts et recherche">
@@ -837,8 +890,9 @@
   <div class="meta">
     <span>Concepts et recherche</span>
     <span>Vérifié 2026-10-04</span>
-  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-fff4a2f75ec6ba88">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-fff4a2f75ec6ba88">Ajouter un commentaire</button></div>
   </div>
+  <div class="tool-actions"><button type="button" data-action="edit" data-outil-id="outil-fff4a2f75ec6ba88">Modifier la fiche</button><button type="button" data-action="comment" data-outil-id="outil-fff4a2f75ec6ba88">Ajouter un commentaire</button></div>
+
 </article></div>
       <p id="empty" class="empty">Aucune ressource ne correspond à cette recherche.</p>
     </main>
@@ -888,7 +942,7 @@
     const API = 'https://codex-prime.minibloom-france.workers.dev/api';
     const fields = ['name','url','description','type','category','verifiedAt'];
     const labels = {name:'Nom',url:'URL',description:'Description',type:'Type',category:'Catégorie',verifiedAt:'Date de vérification'};
-    const baseline = cards.map(card => ({outilId:card.dataset.outilId,name:card.querySelector('h3 a').textContent,url:card.querySelector('h3 a').href,description:card.querySelector('p').textContent,type:card.querySelector('.type').textContent,category:card.dataset.category,verifiedAt:card.querySelector('.meta span:last-child').textContent.replace('Vérifié ','').trim(),customFields:{}}));
+    const baseline = cards.map(card => ({outilId:card.dataset.outilId,name:card.querySelector('h3 a').textContent,url:card.querySelector('h3 a').href,description:card.querySelector('p').textContent,type:card.querySelector('.type').textContent,category:card.dataset.category,verifiedAt:card.querySelector('.meta span:nth-of-type(2)').textContent.replace('Vérifié ','').trim(),customFields:{}}));
     const records = new Map(baseline.map(x=>[x.outilId,x]));
     const comments = new Map();
     // Forms are usable even before deployment. Server-side writes remain disabled
@@ -903,7 +957,7 @@
     let editingId=null, openingAction='edit';
     function updateCard(card, record) {
       card.querySelector('h3 a').textContent=record.name; card.querySelector('h3 a').href=record.url; card.querySelector('p').textContent=record.description;
-      card.querySelector('.type').textContent=record.type; card.querySelector('.meta span:first-child').textContent=record.category; card.querySelector('.meta span:last-child').textContent=`Vérifié ${record.verifiedAt}`;
+      card.querySelector('.type').textContent=record.type; card.querySelector('.meta span:first-child').textContent=record.category; card.querySelector('.meta span:nth-of-type(2)').textContent=`Vérifié ${record.verifiedAt}`;
       card.dataset.category=record.category; card.dataset.search=`${record.name} ${record.description} ${record.type} ${record.category}`.toLowerCase();
     }
     async function request(path, options={}) { const r=await fetch(`${API}${path}`,{...options,credentials:'include',headers:{'Content-Type':'application/json',...(options.headers||{})}});let body={};try{body=await r.json()}catch{};if(!r.ok)throw Object.assign(new Error(body.error||`Erreur ${r.status}`),{status:r.status,body});return body; }
